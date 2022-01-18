@@ -1,0 +1,81 @@
+
+/* -------------------------- TopNavbar -----------------------------*/
+  .topnavbar-full-space {
+    margin-left: 0px; /* No sidenav */
+    width: 100vw;
+  }
+
+  /* TopNavbar css */
+  .topnavbar {
+    background-color: #F5F5F5;
+    position: fixed;
+    top: 0;
+    width: 100%!important;
+    height: 100px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .mobile-menu-toggler-and-brand {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    @media (min-width: 768px) {
+      margin-left: 165px;
+    }
+  }
+
+  .hamburger-icon {
+    position: relative;
+    top: 2px;
+  }
+
+
+
+
+  .topnavbar-full-space{
+      width: 100vw !important;
+  }
+
+  .menu-hamburger-icon-wrapper {
+    width: fit-content;
+    @media (min-width: 768px) {
+      display: none!important;
+    }
+  }
+
+  .top-menu-item {
+    width: 450px;
+    margin-right: 69px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .menu-item {
+      cursor: pointer;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .top-menu-item {
+      display: none;
+    }
+  }
+
+  .topnavbar a,
+  span {
+    float: left;
+    display: block;
+    color: #f2f2f2;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    font-size: 17px;
+    cursor: pointer;
+  }
+
+  .topnavbar a:hover {
+    background: #ddd;
+    color: black;
+  }

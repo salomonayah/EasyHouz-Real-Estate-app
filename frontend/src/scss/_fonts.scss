@@ -1,0 +1,39 @@
+/* Fonts installation */
+/*-------------------------------
+All this should be in a _fonts.scss  file under scss folder:
+@import 'scss/fonts';
+------------------------------------*/
+@font-face {
+        font-family: 'Mulish-Light';
+        /* IE9 Compat Modes */
+        src: url('/assets/fonts/Mulish-Light.woff') format('woff'),
+            /* Pretty Modern Browsers */
+    }
+
+    @font-face {
+        font-family: 'Mulish-Regular';
+        font-display: swap;
+        /* IE9 Compat Modes */
+        src: url('/assets/fonts/Mulish-Regular.woff') format('woff'),
+            /* Pretty Modern Browsers */
+    }
+
+    @font-face {
+        font-family: 'Mulish-Medium';
+        font-display: swap;
+        /* IE9 Compat Modes */
+        src: url('/assets/fonts/Mulish-Medium.woff') format('woff'),
+            /* Pretty Modern Browsers */
+    }
+
+    @font-face {
+        font-family: 'Mulish-Bold';
+        font-display: swap;
+        /* IE9 Compat Modes */
+        src: url('/assets/fonts/Mulish-Bold.woff') format('woff'),
+            /* Pretty Modern Browsers */
+    }
+/*-------------------------------
+In your global style you can import all this font like this:
+@import 'scss/fonts';
+------------------------------------*/
