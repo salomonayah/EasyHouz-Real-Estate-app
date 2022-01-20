@@ -15,6 +15,7 @@ const routes: Routes = [
   },
   {
     path: '',
+    // Home module will contain all the component user can access without authentication
     loadChildren: () => import('./home/home.module').then((mod) => mod.HomeModule),
   },
   {

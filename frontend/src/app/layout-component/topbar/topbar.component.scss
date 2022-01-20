@@ -7,7 +7,7 @@
 
   /* TopNavbar css */
   .topnavbar {
-    background-color: #F5F5F5;
+    background-color: #AFD4E2;
     position: fixed;
     top: 0;
     width: 100%!important;
@@ -15,6 +15,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 1;
   }
 
   .mobile-menu-toggler-and-brand {
@@ -71,7 +72,7 @@
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
-    font-size: 17px;
+    font-size: 1.5rem;
     cursor: pointer;
   }
 
