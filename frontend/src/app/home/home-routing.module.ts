@@ -11,7 +11,7 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'houses',
+    path: 'all-houses',
     component: AllHousesComponent
   },
   {
