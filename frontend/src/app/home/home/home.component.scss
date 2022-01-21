@@ -46,7 +46,7 @@
   }
 
   .subline-text {
-    margin: 18px 0;
+    margin: 10px 0;
   }
 
 }
@@ -109,3 +109,17 @@
   }
 
 }
+
+.hot-deals-list-container {
+  .hot-deals-list {
+    display: flex;
+    min-height: 430px;
+    justify-content: space-between;
+  }
+}
+
+.deal-section-button {
+  width: fit-content;
+  margin: auto;
+}
+

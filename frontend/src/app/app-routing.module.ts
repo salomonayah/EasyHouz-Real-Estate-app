@@ -14,13 +14,18 @@ const routes: Routes = [
     loadChildren: () => import('./core/core.module').then((mod) => mod.CoreModule),
   },
   {
-    path: '',
+    path: 'home',
     // Home module will contain all the component user can access without authentication
     loadChildren: () => import('./home/home.module').then((mod) => mod.HomeModule),
   },
   {
     path: '',
-    redirectTo: '',
+    redirectTo: 'home',
+    pathMatch: 'full',
+  },
+  {
+    path: '**',
+    redirectTo: 'home',
     pathMatch: 'full',
   },
 ];
