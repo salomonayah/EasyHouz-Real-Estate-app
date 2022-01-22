@@ -1,3 +1,21 @@
 .container {
-  margin-top: 100px;
+  margin-top: 120px;
+
+  .all-deals-list-container {
+    .all-deals-list {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      grid-gap: 10px;
+      // display: flex;
+      // flex-wrap: wrap;
+      // min-height: 430px;
+      // justify-content: space-around;
+
+      app-house-preview {
+        margin: 50px 20px;
+      }
+    }
+  }
+
 }
+

@@ -1,23 +1,28 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 import { HousePreviewComponent } from './house-preview/house-preview.component';
 import { FooterComponent } from './layout-component/footer/footer.component';
+import { SidebarComponent } from './layout-component/sidebar/sidebar.component';
 import { TopbarComponent } from './layout-component/topbar/topbar.component';
 
 @NgModule({
   declarations: [
-    HousePreviewComponent,
     TopbarComponent,
-    FooterComponent
+    SidebarComponent,
+    FooterComponent,
+    HousePreviewComponent
   ],
   imports: [
     CommonModule,
+    RouterModule
   ],
   exports: [
-    HousePreviewComponent,
     TopbarComponent,
-    FooterComponent
+    SidebarComponent,
+    FooterComponent,
+    HousePreviewComponent
   ]
 })
 export class SharedModule { }
