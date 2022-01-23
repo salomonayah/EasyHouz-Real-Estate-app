@@ -7,7 +7,7 @@
 
   /* TopNavbar css */
   .topnavbar {
-    background-color: #F5F5F5;
+    background-color: #AFD4E2;
     position: fixed;
     top: 0;
     width: 100%!important;
@@ -15,6 +15,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 2;
   }
 
   .mobile-menu-toggler-and-brand {
@@ -22,7 +23,7 @@
     justify-content: space-between;
     align-items: center;
     @media (min-width: 768px) {
-      margin-left: 165px;
+      margin-left: 65px;
     }
   }
 
@@ -31,6 +32,12 @@
     top: 2px;
   }
 
+  .company-brand {
+    font-family: Mulish-Medium;
+    font-weight: bold;
+    font-size: 50px;
+    color: #1E3240;
+  }
 
 
 
@@ -46,14 +53,15 @@
   }
 
   .top-menu-item {
-    width: 450px;
+    width: 550px;
     margin-right: 69px;
     display: flex;
     justify-content: space-between;
     align-items: center;
 
-    .menu-item {
+    .menu-item a {
       cursor: pointer;
+      font-size: 21px;
     }
   }
 
@@ -63,19 +71,13 @@
     }
   }
 
-  .topnavbar a,
-  span {
-    float: left;
-    display: block;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
+  .topnavbar a {
+    color:#1E3240;
     text-decoration: none;
-    font-size: 17px;
+    opacity: 0.9;
     cursor: pointer;
   }
 
   .topnavbar a:hover {
-    background: #ddd;
     color: black;
   }

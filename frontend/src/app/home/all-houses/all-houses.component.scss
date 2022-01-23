@@ -1,0 +1,17 @@
+.container {
+  margin-top: 120px;
+
+  .all-deals-list-container {
+    .all-deals-list {
+      display: grid;
+      grid-template-columns: auto auto auto;
+      grid-gap: 10px;
+
+      app-house-preview {
+        margin: 50px 20px;
+      }
+    }
+  }
+
+}
+

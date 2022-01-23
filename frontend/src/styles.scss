@@ -16,9 +16,30 @@ body {
     margin: 0;
     padding: 0;
     font-family: Mulish-Regular; // imported font
-    background-color: #E6E6E6;
+    background-color: #FFF;
 }
 
 button {
     cursor: pointer;
 }
+
+.container {
+  width: 76%;
+  font-size: 20px;
+  margin: 30px auto;
+}
+
+.section-title {
+  font-weight: bold;
+  font-size: 25px;
+  line-height: 120%;
+  color: #1E3240;
+}
+
+.section-subTitle {
+  font-size: 18px;
+  line-height: 120%;
+  color: #BDBDBD;
+  margin-bottom: 15px;
+}
+
