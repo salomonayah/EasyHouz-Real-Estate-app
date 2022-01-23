@@ -29,15 +29,16 @@
   cursor: pointer;
   outline: none;
   color: #FFFFFF;
+  font-size: 20px;
 }
 
 /* On mouse-over */
 .sidenav a:hover {
-  color: #35CC61;
+  color: #AFD4E2;
 }
 
 .active {
-  background-color: #35CC61;
+  background-color: #AFD4E2;
   color: white;
 }
 
@@ -50,6 +51,9 @@
   }
 }
 
+.sidebar-menu-item {
+  padding: 15px 0 15px 15px;
+}
 
 .sidenav {
    -ms-overflow-style: none;  /* IE and Edge */

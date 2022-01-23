@@ -1,0 +1,146 @@
+<div class="container">
+
+  <div class="section-title">Add the details of the new house you want to sell</div>
+  <div class="section-subTitle">try to give us enough precision about it.</div>
+
+  <form #newPostForm="ngForm" (ngSubmit)="onSubmit(newPostForm)">
+
+    <div class="new-post-form">
+
+      <input type="file" name="image" style="display: none;" #selectProdImg (change)="fileChangeEvent($event)" />
+
+
+      <div class="image-upload-wrapper">
+        <div class="file-upload-message-wrapper" (click)="selectProdImg.click()" *ngIf="imgToCropSelected == false">
+          <img src="assets/img/file_upload.svg" alt="">
+          <div class="file-upload-message">Click here to select the house image from your device</div>
+          <div class="file-upload-warning">JPG, PNG or PDF with file size no more than 1MB</div>
+        </div>
+
+
+        <div *ngIf="!imgToCropSelected && !croppingValidated && (offerTitle.dirty || offerTitle.touched)"
+          class="text-danger">
+          <small> * Oups ! The house image is required. </small>
+        </div>
+
+        <div class="row croppingZone" *ngIf="imgToCropSelected && (croppingValidated == false)">
+
+          <div class="text-center col-md-8 " style="margin: auto;">
+            <h6 class="text-danger">Please crop your image to make it suitable.</h6>
+            <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 4"
+              [resizeToWidth]="256" format="png" (imageCropped)="imageCropped($event)">
+            </image-cropper>
+
+            <div>
+              <button (click)="rejectCropping()"></button>
+              <button (click)="validCropping()"></button>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="text-center col-md-4" style="width:300px; margin: auto;"
+          *ngIf="imgToCropSelected && croppingValidated">
+
+          <button class="closeImgSelected" (click)="rejectCropping()" nz-button nzType="danger" nzShape="circle">
+            <i nz-icon nzType="close" nzTheme="outline"></i>
+          </button>
+          <div class="importImg">
+            <img [src]="croppedImage" width="100%" height="auto" />
+          </div>
+        </div>
+
+      </div>
+
+
+
+
+      <div class="new-post-form-wrapper">
+
+        <div>
+          <input placeholder="Short description. Example Four bedroom duplex" type="text" name="title" ngModel
+            #offerTitle="ngModel" required>
+          <div *ngIf=" (offerTitle.invalid && (offerTitle.dirty || offerTitle.touched) || (offerTitle.dirty  && !isSet(offerTitle.value))  ) " class="text-danger">
+            <small *ngIf="offerTitle.errors?.required"> * Oups ! This field is required. </small>
+
+          </div>
+          <small *ngIf="
+                (offerTitle.dirty || offerTitle.touched) &&
+                !formDataChecking('text-only', offerTitle.value).status
+              " class="text-danger">
+            {{
+            formDataChecking("text-only", offerTitle.value).message
+            }}
+          </small>
+        </div>
+
+        <div>
+          <input placeholder="Price. Example 150.000 USD" type="number" name="price" ngModel #price="ngModel" required>
+          <div *ngIf=" price.invalid && (price.dirty || price.touched)|| (price.dirty  && !isSet(price.value)) " class="text-danger">
+            <small *ngIf="price.errors?.required"> * Oups ! This field is required. </small>
+          </div>
+          <small *ngIf="(price.dirty || price.touched) && !formDataChecking('unsigned-int', price.value).status" class="text-danger">
+            {{ formDataChecking("unsigned-int", price.value).message }}
+          </small>
+        </div>
+
+
+        <div>
+          <input placeholder="Location. Example Paris,...." type="text" name="location" ngModel #location="ngModel"
+            required>
+          <div *ngIf=" location.invalid && (location.dirty || location.touched) || (location.dirty  && !isSet(location.value)) " class="text-danger">
+            <small *ngIf="location.errors?.required"> * Oups ! This field is required. </small>
+          </div>
+          <small *ngIf="
+                (location.dirty || location.touched) &&
+                !formDataChecking('text-only', location.value).status
+              " class="text-danger">
+            {{
+            formDataChecking("text-only", location.value).message
+            }}
+          </small>
+        </div>
+
+
+        <div>
+          <input placeholder="Others advantages. Example close to hospital and school" type="text" name="advantage" ngModel #advantage="ngModel">
+          <div *ngIf="advantage.invalid && (advantage.dirty || advantage.touched) || (advantage.dirty  && !isSet(advantage.value))" class="text-danger">
+            <small *ngIf="advantage.errors?.required"> * Oups ! This field is required. </small>
+          </div>
+          <small *ngIf="
+                (advantage.dirty || advantage.touched) &&
+                !formDataChecking('text-only', advantage.value).status
+              " class="text-danger">
+            {{
+            formDataChecking("text-only", advantage.value).message
+            }}
+          </small>
+        </div>
+
+        <div>
+          <textarea placeholder="More description. Example Anything the client should know.." id="description"
+            name="description" rows="3" ngModel #description="ngModel" required> </textarea>
+          <div *ngIf="description.invalid && (description.dirty || description.touched) || (description.dirty  && !isSet(description.value))" class="text-danger">
+            <small *ngIf="description.errors?.required"> * Oups ! This field is required. </small>
+          </div>
+          <small *ngIf="
+                (description.dirty || description.touched) &&
+                !formDataChecking('text-only', description.value).status
+              " class="text-danger">
+            {{
+            formDataChecking("text-only", description.value).message
+            }}
+          </small>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="action-button">
+      <button class="button submit-button" type="submit" [disabled]="newPostForm.invalid || !(imgToCropSelected && croppingValidated) || !canSubmitFormData()">Post this offer</button>
+    </div>
+
+  </form>
+</div>
