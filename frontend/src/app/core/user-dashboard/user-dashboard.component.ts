@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-dashboard',
@@ -9,13 +8,9 @@ import { Router } from '@angular/router';
 export class UserDashboardComponent implements OnInit {
 
   constructor(
-    private router: Router,
   ) { }
 
   ngOnInit(): void {
   }
 
-  openAddForm(): void {
-    this.router.navigate(['/main/add-new-posts']);
-  }
 }

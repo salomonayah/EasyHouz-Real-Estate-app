@@ -5,3 +5,30 @@
   line-height: 120%;
   color: #1E3240;
 }
+
+
+.button {
+  width: 70px;
+  height: 70px;
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  border-radius: 50%;
+  border: 2px solid #1E3240;
+  outline: none;
+  box-sizing: border-box;
+  background-color: #1E3240;
+  color: #AFD4E2;
+  font-size: 50px;
+  text-align: center;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+}
+
+.button:active {
+  background: #AFD4E2;
+  border: 2px solid #AFD4E2;
+  color: #1E3240;
+}
