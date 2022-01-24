@@ -9,7 +9,6 @@
   grid-template-columns: 50% 50%;
   grid-gap: 10px;
 
-
   small{
     color: red;
     font-size: 12px;
@@ -118,34 +117,21 @@
     }
   }
 
-  cancel-terminate {
-
-  }
-
   .cancel-cropping {
-    width: fit-content;
     border: 2px solid #d14d3c;
-    border-radius: 4px;
-    box-sizing: border-box;
-    position: relative;
     background-color: #d14d3c;
-    color: #FFFFFF;
-    font-size: 16px;
-    padding: 5px 10px;
-    text-align: center;
-    margin: 4px 2px;
-    text-decoration: none;
-    overflow: hidden;
-    cursor: pointer;
   }
 
   .terminate-cropping {
-    width: fit-content;
     border: 2px solid #4CAF50;
+    background-color: #4CAF50;
+  }
+
+  .cropper-buttons {
+    width: fit-content;
     border-radius: 4px;
     box-sizing: border-box;
     position: relative;
-    background-color: #4CAF50;
     color: #FFFFFF;
     font-size: 16px;
     padding: 5px 10px;

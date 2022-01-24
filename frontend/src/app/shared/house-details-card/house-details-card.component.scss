@@ -1,0 +1,99 @@
+
+.item-wrapper {
+  display: flex;
+  flex-direction: row;
+  background-color: #FFF;
+  padding: 20px 10px;
+  min-height: 100px;
+  border: 1px solid #E6E6E6;
+  border-radius: 4px;
+  box-shadow: 0px 3px 10px #CBC9C940;
+
+  .image-associate {
+      width: 40%;
+      margin-right: 10px;
+
+      .house-img {
+          width: 100%;
+          height: auto;
+          border-radius: 4px;
+      }
+
+  }
+
+  .text-associate {
+      width: 60%;
+
+      .item-title {
+          font-size: 20px;
+          font-weight: bold;
+          color: #33475B;
+      }
+
+      .item-description{
+          font-size: 13px;
+          color: #A0A0A0;
+          margin-top: 5px;
+      }
+
+  }
+
+
+.action-button-box {
+  display: flex;
+  width: 100%;
+
+  .action-button {
+
+    .button {
+      box-sizing: border-box;
+      position: relative;
+      font-size: 16px;
+      padding: 5px 12px;
+      text-align: center;
+      margin-right:30px;
+      text-decoration: none;
+      overflow: hidden;
+      cursor: pointer;
+
+      transition-duration: 0.4s;/* determine the speed of the "hover" effect: */
+      &:hover {
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+      }
+    }
+
+    .button:after {
+      content: "";
+      background: #f1f1f1;
+      display: block;
+      position: absolute;
+      padding-top: 300%;
+      padding-left: 350%;
+      margin-left: -40px !important;
+      margin-top: -120%;
+      opacity: 0;
+      transition: all 0.8s
+    }
+
+    .button:active:after {
+      padding: 0;
+      margin: 0;
+      opacity: 1;
+      transition: 0s
+    }
+  }
+
+  .modify-button {
+    border: 2px solid #e27231;
+    background-color: #e27231;
+    color: #1E3240;
+  }
+
+  .delete-button {
+    border: 2px solid #eb3b24;
+    background-color: #eb3b24;
+    color: #1E3240;
+  }
+
+}
+}
