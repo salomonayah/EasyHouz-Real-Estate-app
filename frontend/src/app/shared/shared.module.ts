@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { AuthModule } from '../auth/auth.module';
 import { HouseDetailsCardComponent } from './house-details-card/house-details-card.component';
 import { HousePreviewComponent } from './house-preview/house-preview.component';
 import { FooterComponent } from './layout-component/footer/footer.component';
@@ -17,6 +18,7 @@ import { TopbarComponent } from './layout-component/topbar/topbar.component';
     HouseDetailsCardComponent
   ],
   imports: [
+    AuthModule,
     CommonModule,
     RouterModule
   ],

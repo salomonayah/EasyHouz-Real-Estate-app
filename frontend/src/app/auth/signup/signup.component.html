@@ -1,1 +1,84 @@
-<p>signup works!</p>
+<div class="container">
+  <div class="sign-in-box">
+
+    <div class="auth-type"> Sign up </div>
+
+    <div class="call-to-action-message">
+      Create a new account to post an offer !
+    </div>
+
+    <div class="sign-in-form-wrapper">
+
+      <form #signInForm="ngForm" (ngSubmit)="onSubmit(signInForm)">
+        <div class="new-post-form-wrapper">
+
+          <div class="input-wrapper">
+            <input placeholder="Full name" type="text" name="fullname" ngModel #fullname="ngModel" required>
+            <span
+              *ngIf=" (fullname.invalid && (fullname.dirty || fullname.touched) || (fullname.dirty  && !isSet(fullname.value))  ) ">
+              <small *ngIf="fullname.errors?.required"> * Oups ! This field is required. </small>
+            </span>
+
+            <small
+              *ngIf="(fullname.dirty || fullname.touched) && !formDataChecking('letter-only', fullname.value).status">
+              {{ formDataChecking("letter-only", fullname.value).message }}
+            </small>
+          </div>
+
+          <div class="input-wrapper">
+            <input placeholder="Phone number" type="tel" name="phonenumber" ngModel #phoneNumberInput
+              #phonenumber="ngModel" required ng2TelInput (hasError)="hasError($event)"
+              (ng2TelOutput)="getNumber($event)" (intlTelInputObject)="telInputObject($event)"
+              [ng2TelInputOptions]="{ 'separateDialCode': true, utilsScript: phoneVerificationCDN }">
+            <div>
+
+              <span
+                *ngIf=" (phonenumber.invalid && (phonenumber.dirty || phonenumber.touched) || (phonenumber.dirty  && !isSet(phonenumber.value))  ) ">
+                <small *ngIf="phonenumber.errors?.required"> * Oups ! This field is required. </small>
+              </span>
+
+              <small
+                *ngIf="(phonenumber.dirty || phonenumber.touched) && !formDataChecking('string-of-number', phonenumber.value).status">
+                {{ formDataChecking("string-of-number", phonenumber.value).message }}
+              </small>
+
+              <small *ngIf="caption && phonenumber.value">
+                {{ caption }}
+              </small>
+            </div>
+          </div>
+
+          <div class="input-wrapper">
+            <input placeholder="Email" type="email" name="email" ngModel #email="ngModel" required>
+            <span
+              *ngIf=" (email.invalid && (email.dirty || email.touched) || (email.dirty  && !isSet(email.value))  ) ">
+              <small *ngIf="email.errors?.required"> * Oups ! This field is required. </small>
+            </span>
+
+            <small *ngIf="(email.dirty || email.touched) && !formDataChecking('email', email.value).status">
+              {{ formDataChecking("email", email.value).message }}
+            </small>
+          </div>
+
+          <div class="input-wrapper">
+            <input placeholder="Password" type="password" name="password" ngModel #password="ngModel" required>
+            <span
+              *ngIf=" password.invalid && (password.dirty || password.touched) || (password.dirty  && !isSet(password.value)) ">
+              <small *ngIf="password.errors?.required"> * Oups ! This field is required. </small>
+            </span>
+          </div>
+        </div>
+
+        <div class="action-button">
+          <button class="button submit-button" type="submit"
+            [disabled]="signInForm.invalid || !formDataChecking('string-of-number', phonenumber.value).status || caption || !formDataChecking('email', email.value).status || !canSubmitFormData()">
+            Login
+          </button>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+
+</div>

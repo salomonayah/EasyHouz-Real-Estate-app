@@ -1,3 +1,25 @@
+<div class="auth-modal-wrapper" *ngIf="authActive">
+  <div class="modal-container" (click)="authActive = false;">
+  </div>
+  <div class="modal-body-card">
+    <div *ngIf="componentToDisplay === 'SignIn'">
+      <app-login></app-login>
+      <div class="container">
+        <div class="call-to-action-message"> No account ? <span (click)="
+        componentToDisplay = 'SignUp'" class="bold-text">Signup</span>  now and enjoy !</div>
+      </div>
+    </div>
+    <div *ngIf="componentToDisplay === 'SignUp'">
+      <app-signup></app-signup>
+      <div class="container">
+        <div class="call-to-action-message"> Oh! You have an account. Then <span  (click)="
+          componentToDisplay = 'SignIn'" class="bold-text">Sign in </span>!</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
 <div class="topnavbar ">
 
   <div class="mobile-menu-toggler-and-brand">
@@ -28,10 +50,10 @@
       <a routerLinkActive="active"  routerLink="/main"  class="">Your account</a>
     </div>
     <div class="menu-item">
-      <a routerLinkActive="active"  routerLink="/auth/signin"  class="">Sign out</a>
+      <a (click)="openSignIn()" class="">Sign out</a>
     </div>
     <div class="menu-item">
-      <a routerLinkActive="active"  routerLink="/auth/signup"  class="">Sign in</a>
+      <a (click)="openSignIn()" class="">Sign in</a>
     </div>
   </div>
 </div>
