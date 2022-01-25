@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
+import { AuthenticationService } from '../auth-services/authentication.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,15 +12,18 @@ export class LoginComponent implements OnInit {
 
   @ViewChild('signInForm', {static: true}) signInForm!: NgForm;
 
-  constructor() { }
+  constructor(private authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
   }
 
   onSubmit(formData: NgForm): void {
-    console.log(formData.form.value);
-    console.log('2');
-    console.log(this.signInForm.form.value);
+    const signInFormData = formData.form.value;
+
+    this.authenticationService.login(signInFormData.email, signInFormData.password ).subscribe(
+      (resp) => { console.log('login', resp); }
+    );
+
   }
 
   isSet(value: any): boolean {

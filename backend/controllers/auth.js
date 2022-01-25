@@ -13,8 +13,8 @@ exports.signup = async (req, res, next) => {
     throw error;
   }
 
-  const fullName = req.body.fullName;
-  const phoneNumber = req.body.phoneNumber;
+  const fullname = req.body.fullname;
+  const phonenumber = req.body.phonenumber;
   const email = req.body.email;
   const password = req.body.password;
   
@@ -22,21 +22,38 @@ exports.signup = async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = new User({
-      fullName: fullName,
-      phoneNumber: phoneNumber,
+      fullname: fullname,
+      phonenumber: phonenumber,
       email: email,
       password: hashedPassword,
     });
 
     const result = await user.save();
+
+    const token = jwt.sign(
+      {
+        userId: result._id.toString(),
+        fullname: fullname,
+        phonenumber: phonenumber,
+        email: email
+      },
+      constants.jwtSecret,
+      { expiresIn: '24h' }
+    );
+
     res.status(201).json({ 
       data: {
-        userId: result._id
+        userId: result._id.toString(),
+        fullname: fullname,
+        phonenumber: phonenumber,
+        email: email,
+        token: token
       },
       code: 201,
       message: 'Welcome ! You are now a member. Your account has been created!',
       error: null
     });
+    
 
   } catch (err) {
     if (!err.statusCode) {
@@ -67,20 +84,23 @@ exports.login = async (req, res, next) => {
     const token = jwt.sign(
       {
         userId: loadedUser._id.toString(),
-        fullName: loadedUser.fullName,
-        phoneNumber: loadedUser.phoneNumber,
+        fullname: loadedUser.fullname,
+        phonenumber: loadedUser.phonenumber,
         email: loadedUser.email
       },
       constants.jwtSecret,
       { expiresIn: '24h' }
     );
 
-    const loginMessage = 'Welcome back' + ` ${loadedUser.fullName}` + '!';
+    const loginMessage = 'Welcome back' + ` ${loadedUser.fullname}` + '!';
 
     res.status(200).json({ 
       data: {
         token: token, 
-        userId: loadedUser._id.toString()
+        userId: loadedUser._id.toString(),
+        fullname: loadedUser.fullname,
+        phonenumber: loadedUser.phonenumber,
+        email: loadedUser.email
       },
       code: 201,
       message: loginMessage,

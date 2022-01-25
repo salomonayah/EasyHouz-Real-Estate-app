@@ -6,6 +6,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
+import { TypedServerResponse } from '../../shared/model/shared.model';
 import { User } from '../model/auth.model';
 import { SetIsLoggedIn, SetUserData } from '../store/auth.actions';
 import { AuthStateModel } from '../store/auth.state';
@@ -26,7 +27,7 @@ export class AuthenticationService {
 
     this.store.select(state => state.AuthState).subscribe(
       (data: AuthStateModel) => {
-        this.userSubject = new BehaviorSubject<User | null>(data.userData);
+        this.userSubject =  new BehaviorSubject<User | null>(data?.userData);
       }
     );
 
@@ -36,14 +37,24 @@ export class AuthenticationService {
       return this.userSubject.value;
   }
 
-  login(username: string, password: string): Observable<User> {
-      return this.http.post<User>(`${environment.apiBaseUrl}/users/authenticate`, { username, password })
-      .pipe(map(user => {
-              this.store.dispatch(new SetUserData(user));
+  login(email: string, password: string): Observable<User> {
+      return this.http.post<TypedServerResponse<User>>(`${environment.apiBaseUrl}/auth/login`, { email, password })
+      .pipe(map(resp => {
+              this.store.dispatch(new SetUserData(resp.data));
               this.store.dispatch(new SetIsLoggedIn(true));
-              this.userSubject.next(user);
+              this.userSubject.next(resp.data);
 
-              return user;
+              return resp.data;
+      }));
+  }
+  signUp(userData: User): Observable<User> {
+      return this.http.post<TypedServerResponse<User>>(`${environment.apiBaseUrl}/auth/signup`, userData)
+      .pipe(map((resp: TypedServerResponse<User>) => {
+            this.store.dispatch(new SetUserData(resp.data));
+            this.store.dispatch(new SetIsLoggedIn(true));
+            this.userSubject.next(resp.data);
+
+            return resp.data;
       }));
   }
 

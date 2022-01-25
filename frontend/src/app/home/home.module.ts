@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
+import { AuthModule } from '../auth/auth.module';
 import { SharedModule } from '../shared/shared.module';
 import { AllHousesComponent } from './all-houses/all-houses.component';
 import { HomeRoutingModule } from './home-routing.module';
@@ -15,6 +16,7 @@ import { SingleHouseComponent } from './single-house/single-house.component';
     SingleHouseComponent
   ],
   imports: [
+    AuthModule,
     CommonModule,
     HomeRoutingModule,
     SharedModule

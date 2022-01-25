@@ -1,6 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
+import { AuthenticationService } from '../auth-services/authentication.service';
+import { User } from '../model/auth.model';
+
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.component.html',
@@ -9,9 +12,9 @@ import { NgForm } from '@angular/forms';
 export class SignupComponent implements OnInit {
 
 
-  @ViewChild('signInForm', {static: true}) signInForm!: NgForm;
+  @ViewChild('signUpForm', {static: true}) signUpForm!: NgForm;
 
-  @ViewChild('gidimoInput', { static: false }) phoneNumberInput!: ElementRef<HTMLInputElement>;
+  @ViewChild('gidimoInput', { static: false }) phonenumberInput!: ElementRef<HTMLInputElement>;
 
   phoneVerificationCDN = 'https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.13/js/utils.js';
 
@@ -22,15 +25,26 @@ export class SignupComponent implements OnInit {
   countryCode = 'fr';
 
 
-  constructor() { }
+  constructor(private authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
   }
 
   onSubmit(formData: NgForm): void {
-    console.log(formData.form.value);
-    console.log('2');
-    console.log(this.signInForm.form.value);
+    const signUpFormData = formData.form.value;
+
+    const userData: User = {
+      fullname: signUpFormData.fullname,
+      phonenumber: signUpFormData.phonenumber,
+      email: signUpFormData.email,
+      password: signUpFormData.password
+    };
+
+    this.authenticationService.signUp(userData).subscribe(
+      (resp) => { console.log('signUp', resp); }
+    );
+
+
   }
 
   isSet(value: any): boolean {
@@ -83,7 +97,7 @@ export class SignupComponent implements OnInit {
 
   canSubmitFormData(): boolean {
     // tslint:disable-next-line:prefer-const
-    let formData = this.signInForm.form.value;
+    let formData = this.signUpForm.form.value;
     // Trim all the string value of the form before sending
     Object.keys(formData).forEach(
       (k) => {
