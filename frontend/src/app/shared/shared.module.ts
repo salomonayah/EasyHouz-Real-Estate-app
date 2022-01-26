@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { AuthModule } from '../auth/auth.module';
+import { HouseDetailsCardComponent } from './house-details-card/house-details-card.component';
 import { HousePreviewComponent } from './house-preview/house-preview.component';
 import { FooterComponent } from './layout-component/footer/footer.component';
 import { SidebarComponent } from './layout-component/sidebar/sidebar.component';
@@ -12,9 +14,11 @@ import { TopbarComponent } from './layout-component/topbar/topbar.component';
     TopbarComponent,
     SidebarComponent,
     FooterComponent,
-    HousePreviewComponent
+    HousePreviewComponent,
+    HouseDetailsCardComponent
   ],
   imports: [
+    AuthModule,
     CommonModule,
     RouterModule
   ],
@@ -22,7 +26,8 @@ import { TopbarComponent } from './layout-component/topbar/topbar.component';
     TopbarComponent,
     SidebarComponent,
     FooterComponent,
-    HousePreviewComponent
+    HousePreviewComponent,
+    HouseDetailsCardComponent
   ]
 })
 export class SharedModule { }

@@ -25,26 +25,25 @@
 
         <div class="row croppingZone" *ngIf="imgToCropSelected && (croppingValidated == false)">
 
-          <div class="text-center col-md-8 " style="margin: auto;">
+          <div class="" style="margin: auto;">
             <h6 class="text-danger">Please crop your image to make it suitable.</h6>
-            <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 4"
-              [resizeToWidth]="256" format="png" (imageCropped)="imageCropped($event)">
+            <image-cropper [imageChangedEvent]="imageChangedEvent" [maintainAspectRatio]="true" [aspectRatio]="4 / 5"
+              [resizeToWidth]="300"  [resizeToHeight]="350" format="png" (imageCropped)="imageCropped($event)">
             </image-cropper>
 
             <div>
-              <button (click)="rejectCropping()"></button>
-              <button (click)="validCropping()"></button>
+              <button class="cropper-buttons cancel-cropping" (click)="rejectCropping()"> Cancel cropping</button>
+              <button class="cropper-buttons terminate-cropping" (click)="validCropping()"> Terminate cropping</button>
             </div>
 
           </div>
 
         </div>
 
-        <div class="text-center col-md-4" style="width:300px; margin: auto;"
+        <div class="" style="width:300px; margin: auto;"
           *ngIf="imgToCropSelected && croppingValidated">
 
-          <button class="closeImgSelected" (click)="rejectCropping()" nz-button nzType="danger" nzShape="circle">
-            <i nz-icon nzType="close" nzTheme="outline"></i>
+          <button class="cancel-cropping" (click)="rejectCropping()"> X
           </button>
           <div class="importImg">
             <img [src]="croppedImage" width="100%" height="auto" />

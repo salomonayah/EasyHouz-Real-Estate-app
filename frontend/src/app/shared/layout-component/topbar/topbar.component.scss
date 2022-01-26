@@ -81,3 +81,58 @@
   .topnavbar a:hover {
     color: black;
   }
+
+.container {
+  width: 90%;
+}
+
+.call-to-action-message {
+  font-size: 18px;
+  line-height: 20px;
+  text-align: center;
+  color: #224957;
+  margin-bottom: 40px;
+
+  .bold-text {
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+
+.auth-modal-wrapper {
+  .modal-container {
+      width: 100vw;
+      height: 100vh;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: rgba(0,0,0,0.75);
+      z-index: 50;
+  }
+
+  .modal-body-card {
+      position: fixed;
+      top: 10px;
+      right: 0px;
+      width: 400px;
+      height: calc(100vh - 20px);
+      overflow: scroll;
+      background-color: #FFF;
+      box-shadow: 0px 2px 8px rgba(0,0,0,0.26);
+      z-index: 100;
+      padding: 16px;
+  }
+
+
+  .modal-body-card {
+     -ms-overflow-style: none;  /* IE and Edge */
+     scrollbar-width: none;  /* Firefox */
+  }
+
+  .modal-body-card::-webkit-scrollbar {
+     display: none;
+  }
+
+
+}

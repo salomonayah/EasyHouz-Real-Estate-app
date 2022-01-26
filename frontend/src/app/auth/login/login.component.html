@@ -1,1 +1,48 @@
-<p>login works!</p>
+<div class="container">
+  <div class="sign-in-box">
+
+    <div class="auth-type"> Sign in </div>
+
+    <div class="call-to-action-message">
+      Sign in and start posting new offer!
+    </div>
+
+    <div class="sign-in-form-wrapper">
+
+      <form #signInForm="ngForm" (ngSubmit)="onSubmit(signInForm)">
+        <div class="new-post-form-wrapper">
+
+          <div class="input-wrapper">
+            <input placeholder="Email" type="email" name="email" ngModel #email="ngModel" required>
+            <span *ngIf=" (email.invalid && (email.dirty || email.touched) || (email.dirty  && !isSet(email.value))  ) "
+              class="text-danger">
+              <small *ngIf="email.errors?.required"> * Oups ! This field is required. </small>
+            </span>
+
+            <small *ngIf="(email.dirty || email.touched) && !formDataChecking('email', email.value).status"
+              class="text-danger">
+              {{ formDataChecking("text-only", email.value).message }}
+            </small>
+          </div>
+
+          <div class="input-wrapper">
+            <input placeholder="Password" type="password" name="password" ngModel #password="ngModel" required>
+            <span
+              *ngIf=" password.invalid && (password.dirty || password.touched) || (password.dirty  && !isSet(password.value)) "
+              class="text-danger">
+              <small *ngIf="password.errors?.required"> * Oups ! This field is required. </small>
+            </span>
+          </div>
+        </div>
+
+        <div class="action-button">
+          <button class="button submit-button" type="submit"
+            [disabled]="signInForm.invalid || !canSubmitFormData()">Login</button>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+
+</div>
