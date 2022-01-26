@@ -22,9 +22,9 @@ router.post(
       .custom((value, { req }) => {
         return User.findOne({ phonenumber: value }).then(userDoc => {
           if (userDoc) {
-            return Promise.reject('This phone number address already exists!');
+            throw new Error('This phone number address already exists!');
           }
-        });
+        })
       }),
 
     body('email')
@@ -33,9 +33,9 @@ router.post(
       .custom((value, { req }) => {
         return User.findOne({ email: value }).then(userDoc => {
           if (userDoc) {
-            return Promise.reject('Email address already exists!');
+            throw new Error('Email address already exists!');
           }
-        });
+        })
       })
       .normalizeEmail(),
 

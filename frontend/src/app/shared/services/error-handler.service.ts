@@ -46,6 +46,11 @@ export class ErrorHandlerService {
         const title = 'Request Failed';
         this.showErrorToast(message, title);
 
+      } else if (error.status === 422) {
+        const message = 'Sorry, the details you are sending contain some invalid data. Please try again';
+        const title = 'Invalid Request';
+        this.showErrorToast(message, title);
+
       } else if (error.status === 500) {
         const errorMessage = 'Couldn\'t complete the current action. Please try later.';
         this.showErrorToast(errorMessage, '');

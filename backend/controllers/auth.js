@@ -7,10 +7,16 @@ const User = require('../models/user');
 exports.signup = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    const error = new Error('Validation failed.');
-    error.statusCode = 422;
-    error.data = errors.array();
-    throw error;
+    try {
+      const error = new Error('Validation failed.');
+      error.statusCode = 422;
+      error.data = errors.array();
+      throw error;
+    } catch (error) {
+      next(error);
+      // Stop setting header after error has been sent
+      return;
+    }
   }
 
   const fullname = req.body.fullname;
