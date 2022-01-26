@@ -10,13 +10,14 @@ import { ErrorHandlerService } from '../../shared/services/error-handler.service
 export class ErrorInterceptor implements HttpInterceptor {
     constructor( private errorHandlerService: ErrorHandlerService ) {  }
 
-    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        return next.handle(request).pipe(catchError(err => {
+    intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any> > {
+      return next.handle(request).pipe(
+        catchError(err => {
 
-          this.errorHandlerService.handleError(err);
+              this.errorHandlerService.handleError(err);
 
-          const error = err.error.message || err.statusText;
-          return throwError(error);
-      }));
-    }
+              const error = err.error.message || err.statusText;
+              return throwError(error);
+        }));
+      }
 }

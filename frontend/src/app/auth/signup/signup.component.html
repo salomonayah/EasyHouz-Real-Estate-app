@@ -9,7 +9,7 @@
 
     <div class="sign-in-form-wrapper">
 
-      <form #signInForm="ngForm" (ngSubmit)="onSubmit(signInForm)">
+      <form #signUpForm="ngForm" (ngSubmit)="onSubmit(signUpForm)">
         <div class="new-post-form-wrapper">
 
           <div class="input-wrapper">
@@ -71,7 +71,7 @@
 
         <div class="action-button">
           <button class="button submit-button" type="submit"
-            [disabled]="signInForm.invalid || !formDataChecking('string-of-number', phonenumber.value).status || caption || !formDataChecking('email', email.value).status || !canSubmitFormData()">
+            [disabled]="signUpForm.invalid || !formDataChecking('string-of-number', phonenumber.value).status || caption || !formDataChecking('email', email.value).status || !canSubmitFormData()">
             Login
           </button>
         </div>

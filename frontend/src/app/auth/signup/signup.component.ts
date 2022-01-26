@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { AuthenticationService } from '../auth-services/authentication.service';
@@ -11,6 +11,8 @@ import { User } from '../model/auth.model';
 })
 export class SignupComponent implements OnInit {
 
+
+  @Output() userCreated = new EventEmitter<boolean>();
 
   @ViewChild('signUpForm', {static: true}) signUpForm!: NgForm;
 
@@ -41,9 +43,10 @@ export class SignupComponent implements OnInit {
     };
 
     this.authenticationService.signUp(userData).subscribe(
-      (resp) => { console.log('signUp', resp); }
-    );
-
+      (resp) => {
+        this.userCreated.emit(true);
+        console.log('signUp', resp);
+    });
 
   }
 
