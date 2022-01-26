@@ -4,9 +4,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const multer = require('multer');
-
-const authRoutes = require('./routes/auth');
 const constants = require('./constant/constant');
+
+const announcementRoutes = require('./routes/announcement');
+const authRoutes = require('./routes/auth');
+
 const app = express();
 
 const fileStorage = multer.diskStorage({
@@ -46,6 +48,7 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use('/announcement', announcementRoutes);
 app.use('/auth', authRoutes);
 
 app.use((error, req, res, next) => {
