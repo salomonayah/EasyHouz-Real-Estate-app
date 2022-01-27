@@ -31,8 +31,8 @@ export class TopbarComponent implements OnDestroy, OnInit {
   ngOnInit(): void {
     this.authState$.pipe(takeWhile(() => this.componentIsActive))
     .subscribe((state) => {
-      console.log('isLoggedIn$');
-      console.log(state);
+      // console.log('isLoggedIn$');
+      // console.log(state);
       this.isLoggedIn = state.isLoggedIn;
     });
   }

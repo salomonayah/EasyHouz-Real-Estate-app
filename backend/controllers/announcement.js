@@ -32,10 +32,14 @@ exports.addNewAnnouncement = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     try {
-      const error = new Error('Validation failed. Some data are incorrect');
+      const messages = errors.array().map((error) => {
+        return error.msg;
+      }).join(". ");
+
+      const error = new Error('Validation failed. ' + messages);
       error.statusCode = 422;
-      error.data = errors.array();
       throw error;
+
     } catch (error) {
       next(error);
       // Stop setting header after error has been sent
@@ -46,7 +50,6 @@ exports.addNewAnnouncement = async (req, res, next) => {
     try {
       const error = new Error('No image provided. Please attach an image.');
       error.statusCode = 422;
-      error.data = errors.array();
       throw error;
     } catch (error) {
       next(error);
@@ -124,7 +127,12 @@ exports.editAnnouncement = async (req, res, next) => {
   const announcementId = req.params.announcementId;
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    const error = new Error('Validation failed, entered data is incorrect.');
+
+    const messages = errors.array().map((error) => {
+      return error.msg;
+    }).join(". ");
+
+    const error = new Error('Validation failed. ' + messages);
     error.statusCode = 422;
     throw error;
   }

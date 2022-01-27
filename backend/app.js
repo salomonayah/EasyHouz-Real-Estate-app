@@ -48,8 +48,8 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/announcement', announcementRoutes);
-app.use('/auth', authRoutes);
+app.use('/api/announcement', announcementRoutes);
+app.use('/api/auth', authRoutes);
 
 app.use((error, req, res, next) => {
   const status = error.statusCode || 500;

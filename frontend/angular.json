@@ -35,6 +35,7 @@
             ],
             "styles": [
               "src/styles.scss",
+              "node_modules/ngx-toastr/toastr.css",
               "node_modules/intl-tel-input/build/css/intlTelInput.css"
             ],
             "scripts": [
@@ -74,7 +75,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "angular-fontend:build"
+            "browserTarget": "angular-fontend:build",
+            "proxyConfig": "proxy.conf.json"
           },
           "configurations": {
             "production": {

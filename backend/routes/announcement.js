@@ -6,19 +6,19 @@ const isAuth = require('../middleware/is-auth');
 
 const router = express.Router();
 
-// GET /announcement/getAll
+// GET /api/announcement/getAll?page=< pageNumber >
 router.get('/getAll', isAuth, announcementController.getAllAnnouncements);
 
-// POST /announcement/addNew
+// POST /api/announcement/addNew
 router.post('/addNew', isAuth, announcementValidator, announcementController.addNewAnnouncement);
 
-// GET /announcement/single/< announcementId >
+// GET /api/announcement/single/< announcementId >
 router.get('/single/:announcementId', isAuth, announcementController.singleAnnouncement);
 
-// PUT /announcement/edit/< announcementId >
+// PUT /api/announcement/edit/< announcementId >
 router.put('/edit/:announcementId', isAuth, announcementValidator, announcementController.editAnnouncement);
 
-// GET /announcement/edit/< announcementId >
+// GET /api/announcement/edit/< announcementId >
 router.delete('/remove/:announcementId', isAuth, announcementController.removeAnnouncement);
 
 

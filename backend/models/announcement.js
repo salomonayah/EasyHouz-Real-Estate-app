@@ -25,9 +25,7 @@ const announcementSchema = new Schema(
     },   
     imageUrl: {
       type: String,
-      required: true,
-      unique : true, 
-      dropDups: true
+      required: true
     },
     userId: {
       type: Schema.Types.ObjectId,

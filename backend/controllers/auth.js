@@ -8,9 +8,13 @@ exports.signup = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     try {
-      const error = new Error('Validation failed.');
+      const messages = errors.array().map((error) => {
+        return error.msg;
+      }).join(". ");
+
+      const error = new Error('Validation failed. ' + messages );
       error.statusCode = 422;
-      error.data = errors.array();
+      
       throw error;
     } catch (error) {
       next(error);
