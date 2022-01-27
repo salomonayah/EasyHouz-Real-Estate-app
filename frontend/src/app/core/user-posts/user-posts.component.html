@@ -22,7 +22,12 @@
 
 
 <ng-template #userHouseListTemp>
-  <app-house-details-card *ngFor="let item of userHouseList; let i = index" [houseDetais]="item" ></app-house-details-card>
+  <app-house-details-card
+  *ngFor="let item of userHouseList; let i = index"
+  [houseDetais]="item"
+  (modifyButtonClicked)="modifyUserAnnouncement($event)"
+  (deleteButtonClicked)="deleteUserAnnouncement($event)"
+   ></app-house-details-card>
 </ng-template>
 
 

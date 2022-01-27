@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
@@ -19,11 +19,16 @@ export class HouseDetailsCardComponent implements OnInit, OnDestroy {
 
   @Input() houseDetais: House;
 
+  @Output() deleteButtonClicked = new EventEmitter<string>();
+  @Output() modifyButtonClicked = new EventEmitter<string>();
+
   @Select(AuthState) authState$: Observable<AuthStateModel>;
 
   user: User | null;
 
   componentActive = false;
+
+
 
   constructor() {
     this.componentActive = true;
@@ -40,8 +45,17 @@ export class HouseDetailsCardComponent implements OnInit, OnDestroy {
     return this.user?.userId === this.houseDetais?.userId;
   }
 
+  deleteUserAnnouncement(): void {
+    this.deleteButtonClicked.emit(this.houseDetais.houseId);
+  }
+
+  modifyUserAnnouncement(): void {
+    this.modifyButtonClicked.emit(this.houseDetais.houseId);
+  }
+
   ngOnDestroy(): void {
     this.componentActive = false;
   }
 
 }
+

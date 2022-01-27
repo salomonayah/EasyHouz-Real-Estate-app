@@ -14,11 +14,11 @@
       <div class="action-button-box" *ngIf="canModify()">
 
         <div class="action-button">
-          <button class="button modify-button">Modify</button>
+          <button class="button modify-button" (click)="modifyUserAnnouncement()">Modify</button>
         </div>
 
         <div class="action-button">
-          <button class="button delete-button">Delete</button>
+          <button class="button delete-button" (click)="deleteUserAnnouncement()">Delete</button>
         </div>
 
       </div>

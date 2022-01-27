@@ -57,6 +57,20 @@ export class UserPostsComponent implements OnInit , OnDestroy {
     this.router.navigateByUrl(url);
   }
 
+  deleteUserAnnouncement(announcementId: string): void {
+    const userId = this.user?.userId || '';
+
+    this.userDashboardService.deleteUserHouse(userId , announcementId).subscribe(
+      (resp) => {
+        this.userHouseList = resp.data.announcements;
+      }
+    );
+
+  }
+
+  modifyUserAnnouncement(announcementId: string): void {
+
+  }
 
   ngOnDestroy(): void {
     this.componentActive = false;
