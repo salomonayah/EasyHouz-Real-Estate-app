@@ -12,7 +12,7 @@ const routes: Routes = [
     component: UserDashboardComponent,
     children: [
       {
-        path: '',
+        path: 'onboarding',
         component: UserOnboardingComponent
       },
       {
@@ -23,6 +23,11 @@ const routes: Routes = [
         path: 'add-new-posts',
         component: AddNewOfferComponent
       },
+      {
+        path: '',
+        redirectTo: 'onboarding',
+        pathMatch: 'full',
+      }
     ]
   }
 ];

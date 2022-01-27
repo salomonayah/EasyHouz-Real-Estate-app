@@ -25,7 +25,11 @@ import { AuthState } from './auth/store/auth.state';
     NgxsModule.forRoot([
       AuthState
     ]),
-    NgxsStoragePluginModule.forRoot({key: 'AuthState'}),
+    NgxsStoragePluginModule.forRoot({
+      key: [
+        'auth'
+      ]
+    }),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
     ToastrModule.forRoot(), // ToastrModule added

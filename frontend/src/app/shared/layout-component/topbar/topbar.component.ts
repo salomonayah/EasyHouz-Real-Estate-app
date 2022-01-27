@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Select, Store } from '@ngxs/store';
+import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 
@@ -25,14 +25,11 @@ export class TopbarComponent implements OnDestroy, OnInit {
 
   constructor(
     private authenticationService: AuthenticationService,
-    private store: Store
   ) {}
 
   ngOnInit(): void {
     this.authState$.pipe(takeWhile(() => this.componentIsActive))
     .subscribe((state) => {
-      // console.log('isLoggedIn$');
-      // console.log(state);
       this.isLoggedIn = state.isLoggedIn;
     });
   }

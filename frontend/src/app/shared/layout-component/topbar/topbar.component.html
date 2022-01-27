@@ -41,13 +41,13 @@
 
   <div class="top-menu-item">
     <div class="menu-item">
-      <a routerLinkActive="active"  routerLink="/home"  class="">Home</a>
+      <a routerLinkActive="active"  routerLink="/home/welcome"  class="">Home</a>
     </div>
     <div class="menu-item">
-      <a routerLinkActive="active"  routerLink="/home/all-houses"  class="">Houses for sale</a>
+      <a routerLinkActive="active" routerLink="/home/all-houses"  class="">Houses for sale</a>
     </div>
     <div class="menu-item" *ngIf="isLoggedIn">
-      <a routerLinkActive="active"   routerLink="/main"  class="">Your account</a>
+      <a routerLinkActive="active"   routerLink="/main/onboarding"  class="">Your account</a>
     </div>
     <div class="menu-item"  *ngIf="isLoggedIn">
       <a (click)="signOut()" class="">Sign out</a>

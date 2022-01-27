@@ -7,7 +7,7 @@ import { SingleHouseComponent } from './single-house/single-house.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'welcome',
     component: HomeComponent
   },
   {
@@ -17,6 +17,11 @@ const routes: Routes = [
   {
     path: 'house/:id',
     component: SingleHouseComponent
+  },
+  {
+    path: '',
+    redirectTo: 'welcome',
+    pathMatch: 'full',
   }
 ];
 

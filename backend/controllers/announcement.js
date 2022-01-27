@@ -62,7 +62,7 @@ exports.addNewAnnouncement = async (req, res, next) => {
   const location = req.body.location;
   const advantage = req.body.advantage;
   const description = req.body.description;
-  const imageUrl = req.file.path;
+  const imageUrl = req.file.path + req.fileExtension;
 
   const announcement = new Announcement({
     title: title,
