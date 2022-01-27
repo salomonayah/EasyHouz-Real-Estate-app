@@ -67,6 +67,7 @@ export class AuthenticationService {
       // localStorage.removeItem('user');
       this.store.dispatch(new SetUserData(null));
       this.store.dispatch(new SetIsLoggedIn(false));
+      localStorage.clear();
 
       // Using subject here: in case any component want to get user data directly form this service
       this.userSubject.next(null);
