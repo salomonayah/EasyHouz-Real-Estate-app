@@ -13,7 +13,7 @@ router.get('/getAll', announcementController.getAllAnnouncements);
 router.post('/addNew', isAuth, announcementValidator, announcementController.addNewAnnouncement);
 
 // GET /api/announcement/single/< announcementId >
-router.get('/single/:announcementId', isAuth, announcementController.singleAnnouncement);
+router.get('/single/:announcementId', announcementController.singleAnnouncement);
 
 // PUT /api/announcement/edit/< announcementId >
 router.put('/edit/:announcementId', isAuth, announcementValidator, announcementController.editAnnouncement);

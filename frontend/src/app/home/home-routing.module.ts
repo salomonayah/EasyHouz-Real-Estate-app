@@ -20,7 +20,7 @@ const routes: Routes = [
         component: AllHousesComponent
       },
       {
-        path: 'house/:id',
+        path: 'house/:houseId',
         component: SingleHouseComponent
       },
       {

@@ -9,13 +9,8 @@ const User = require('../models/user');
 exports.getAllAnnouncements = async (req, res, next) => {
   const currentPage = +req.query.page || 1;
   const perPage = +req.query.perPage;
-
-  // console.log('currentPage', currentPage)
-  // console.log('perPage', perPage)
-  
   try {
     const totalItems = await Announcement.find().countDocuments();
-    // console.log('totalItems', totalItems)
 
     const dbannouncements = await Announcement.find()
       .skip((currentPage - 1) * perPage)
@@ -104,6 +99,7 @@ exports.addNewAnnouncement = async (req, res, next) => {
     imageUrl: imageUrl,
     userId: req.userId
   });
+
   try {
     await announcement.save();
     const user = await User.findById(req.userId);
@@ -138,15 +134,38 @@ exports.addNewAnnouncement = async (req, res, next) => {
 
 exports.singleAnnouncement = async (req, res, next) => {
   const announcementId = req.params.announcementId;
-  const announcement = await Announcement.findById(announcementId);
+
+  const dbannouncement = await Announcement.findById(announcementId);
+
   try {
-    if (!announcement) {
+    if (!dbannouncement) {
       const error = new Error('Could not find announcement.');
       error.statusCode = 404;
       throw error;
     }
-    res.status(200).json({ message: 'Announcement fetched.', announcement: announcement });
-  } catch (err) {
+    
+    const announcement = { 
+      houseId: dbannouncement._id.toString(), 
+      title: dbannouncement.title,
+      price: dbannouncement.price,
+      location: dbannouncement.location,
+      advantage: dbannouncement.advantage,
+      description: dbannouncement.description,
+      imageUrl: dbannouncement.imageUrl,
+      userId: dbannouncement.userId,
+      createdAt: dbannouncement.createdAt,
+      updatedAt: dbannouncement.updatedAt
+    }
+
+    res.status(201).json({ 
+      data: announcement,
+      code: 201,
+      message: 'Announcement detail fetched!',
+      error: null
+    });
+
+  } 
+  catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;
     }

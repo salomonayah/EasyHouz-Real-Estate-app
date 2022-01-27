@@ -16,8 +16,8 @@ export class HomeService {
     return this.http.get<TypedServerResponse<HouseList>>(`/api/announcement/getAll?page=${pageNumber}&perPage=${itemsPerPage}`);
   }
 
-  getHouseById(houseId: string): Observable<House[]> {
-    return this.http.get<House[]>(`/api/houses/${houseId}`);
+  getHouseById(houseId: string): Observable<TypedServerResponse<House>> {
+    return this.http.get<TypedServerResponse<House>>(`/api/announcement/single/${houseId}`);
   }
 
 }
