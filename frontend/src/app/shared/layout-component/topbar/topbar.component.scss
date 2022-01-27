@@ -82,6 +82,10 @@
     color: black;
   }
 
+  .topnavbar a.active {
+    text-decoration: underline;
+  }
+
 .container {
   width: 90%;
 }

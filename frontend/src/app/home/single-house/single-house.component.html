@@ -1,7 +1,13 @@
-<p>single-house works!</p>
-<p>single-house works!</p>
-<p>single-house works!</p>
-<p>single-house works!</p>
-<p>single-house works!</p>
-<p>single-house works!</p>
-<p>single-house works!</p>
+<div class="container">
+  <div class="section-title">Be the first to buy this house !</div>
+  <div class="section-subTitle">We can help you get in touch with the house owner.</div>
+
+  <div class="all-deals-list-container">
+    <div class="all-deals-list">
+      <app-house-details-card *ngIf="houseDetails?.houseId"
+        [houseDetais]="houseDetails"
+      ></app-house-details-card>
+    </div>
+  </div>
+
+</div>

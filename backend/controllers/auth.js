@@ -7,10 +7,20 @@ const User = require('../models/user');
 exports.signup = async (req, res, next) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
-    const error = new Error('Validation failed.');
-    error.statusCode = 422;
-    error.data = errors.array();
-    throw error;
+    try {
+      const messages = errors.array().map((error) => {
+        return error.msg;
+      }).join(". ");
+
+      const error = new Error('Validation failed. ' + messages );
+      error.statusCode = 422;
+      
+      throw error;
+    } catch (error) {
+      next(error);
+      // Stop setting header after error has been sent
+      return;
+    }
   }
 
   const fullname = req.body.fullname;
@@ -53,7 +63,6 @@ exports.signup = async (req, res, next) => {
       message: 'Welcome ! You are now a member. Your account has been created!',
       error: null
     });
-    
 
   } catch (err) {
     if (!err.statusCode) {
@@ -66,21 +75,40 @@ exports.signup = async (req, res, next) => {
 exports.login = async (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
+
   let loadedUser;
   try {
     const user = await User.findOne({ email: email });
     if (!user) {
-      const error = new Error('email or password invalid. Please verify your credentials.');
-      error.statusCode = 401;
-      throw error;
+      try {
+        const error = new Error('email or password invalid. Please verify your credentials.');
+        error.statusCode = 401;
+        error.data = [];
+        throw error;
+      } catch (error) {
+        next(error);
+        // Stop setting header after error has been sent
+        return;
+      }
     }
-    loadedUser = user;
+
     const isEqual = await bcrypt.compare(password, user.password);
+
     if (!isEqual) {
-      const error = new Error('email or password invalid. Please verify your credentials.');
-      error.statusCode = 401;
-      throw error;
+      try {
+        const error = new Error('email or password invalid. Please verify your credentials.');
+        error.statusCode = 401;
+        error.data = [];
+        throw error;
+      } catch (error) {
+        next(error);
+        // Stop setting header after error has been sent
+        return;
+      }
     }
+
+    loadedUser = user;
+
     const token = jwt.sign(
       {
         userId: loadedUser._id.toString(),

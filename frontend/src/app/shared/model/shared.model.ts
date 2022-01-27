@@ -2,17 +2,19 @@ export interface ServerResponse {
   data: any;
   code: number;
   message: string;
-  error: Error;
+  error: ServerError;
 }
 
 export interface TypedServerResponse<T> {
   data: T;
   code: number;
   message: string;
-  error: Error;
+  error: ServerError;
 }
 
-interface Error {
+export interface ServerError {
   code: number;
+  error: any;
   message: string;
 }
+

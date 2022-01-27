@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
+
+import { UserDashboardService } from '../service/user-dashboard.service';
 
 @Component({
   selector: 'app-add-new-offer',
@@ -17,20 +20,39 @@ export class AddNewOfferComponent implements OnInit {
   croppingValidated = false;
   croppedImage: any = '';
   imgToCrop = false;
-  housePicture = null;
+  housePicture: File;
   uploadingError: any;
 
 
-  constructor() { }
+  constructor(
+    private userDashboardService: UserDashboardService,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
 
   }
 
   onSubmit(formData: NgForm): void {
-    console.log(formData.form.value);
-    console.log('2');
-    console.log(this.newPostForm.form.value);
+    const formValues = formData.form.value;
+    const fd = new FormData();
+
+    fd.append('image', this.housePicture);
+    fd.append('title', formValues.title);
+    fd.append('price', formValues.price);
+    fd.append('location', formValues.location);
+    fd.append('advantage', formValues.advantage);
+    fd.append('description', formValues.description);
+
+    console.log('Add New House img: ', fd.get('image'));
+    console.log('Add New House: ', fd);
+
+    this.userDashboardService.createHouse(fd).subscribe(
+      (resp) => {
+        console.log('New House', resp);
+        this.router.navigate(['/main/user-posts']);
+      }
+    );
   }
 
   validCropping(): void {

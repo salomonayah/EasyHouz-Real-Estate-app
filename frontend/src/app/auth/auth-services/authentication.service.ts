@@ -2,10 +2,10 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngxs/store';
+import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { environment } from '../../../environments/environment';
 import { TypedServerResponse } from '../../shared/model/shared.model';
 import { User } from '../model/auth.model';
 import { SetIsLoggedIn, SetUserData } from '../store/auth.actions';
@@ -22,9 +22,9 @@ export class AuthenticationService {
   constructor(
       private router: Router,
       private http: HttpClient,
-      private store: Store
+      private store: Store,
+      private toast: ToastrService
   ) {
-
     this.store.select(state => state.AuthState).subscribe(
       (data: AuthStateModel) => {
         this.userSubject =  new BehaviorSubject<User | null>(data?.userData);
@@ -38,8 +38,10 @@ export class AuthenticationService {
   }
 
   login(email: string, password: string): Observable<User> {
-      return this.http.post<TypedServerResponse<User>>(`${environment.apiBaseUrl}/auth/login`, { email, password })
+      return this.http.post<TypedServerResponse<User>>('api/auth/login', { email, password })
       .pipe(map(resp => {
+
+              this.toast.success(resp.message);
               this.store.dispatch(new SetUserData(resp.data));
               this.store.dispatch(new SetIsLoggedIn(true));
               this.userSubject.next(resp.data);
@@ -48,8 +50,9 @@ export class AuthenticationService {
       }));
   }
   signUp(userData: User): Observable<User> {
-      return this.http.post<TypedServerResponse<User>>(`${environment.apiBaseUrl}/auth/signup`, userData)
+      return this.http.post<TypedServerResponse<User>>('api/auth/signup', userData)
       .pipe(map((resp: TypedServerResponse<User>) => {
+            this.toast.success(resp.message);
             this.store.dispatch(new SetUserData(resp.data));
             this.store.dispatch(new SetIsLoggedIn(true));
             this.userSubject.next(resp.data);
@@ -63,10 +66,11 @@ export class AuthenticationService {
       // localStorage.removeItem('user');
       this.store.dispatch(new SetUserData(null));
       this.store.dispatch(new SetIsLoggedIn(false));
+      localStorage.clear();
 
       // Using subject here: in case any component want to get user data directly form this service
       this.userSubject.next(null);
 
-      this.router.navigate(['/home']);
+      this.router.navigate(['/home/welcome']);
   }
 }

@@ -27,7 +27,9 @@ export class SignupComponent implements OnInit {
   countryCode = 'fr';
 
 
-  constructor(private authenticationService: AuthenticationService) { }
+  constructor(
+    private authenticationService: AuthenticationService
+  ) { }
 
   ngOnInit(): void {
   }

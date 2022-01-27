@@ -4,9 +4,11 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const multer = require('multer');
-
-const authRoutes = require('./routes/auth');
 const constants = require('./constant/constant');
+
+const announcementRoutes = require('./routes/announcement');
+const authRoutes = require('./routes/auth');
+
 const app = express();
 
 const fileStorage = multer.diskStorage({
@@ -14,7 +16,9 @@ const fileStorage = multer.diskStorage({
     cb(null, 'images');
   },
   filename: (req, file, cb) => {
-    cb(null, new Date().toISOString() + '-' + file.originalname);
+    const fileExtension = '.'+file.mimetype.split('/')[1];
+    req.fileExtension = fileExtension
+    cb(null, new Date().toISOString() + '-' + file.originalname + fileExtension);
   }
 });
 
@@ -46,14 +50,18 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/auth', authRoutes);
+app.use('/api/announcement', announcementRoutes);
+app.use('/api/auth', authRoutes);
 
 app.use((error, req, res, next) => {
-  console.log(error);
   const status = error.statusCode || 500;
   const message = error.message;
-  const data = error.data;
-  res.status(status).json({ message: message, data: data });
+  const data = error.data;  
+  res.status(status).json({
+    code: status,
+    message: message,
+    error: data
+  });
 });
 
 mongoose

@@ -1,11 +1,21 @@
-import { User } from '../../auth/model/auth.model';
-
 export interface House {
-  pictureUrl: string;
+  houseId: string;
+  imageUrl: string;
   title: string;
   price: number;
   location: string;
   advantage: string;
   description: string;
-  seller?: User;
+  userId?: string;
+  createdAt?: string;
+  updatedAt?: string;
 }
+
+export interface HouseList {
+  announcements: House[];
+  totalItems: number;
+  totalPages: number;
+  currentPage: number;
+}
+
+

@@ -42,8 +42,13 @@ export class ErrorHandlerService {
         this.authenticationService.logout();
 
       } else if (error.status === 400) {
-        const message = 'Sorry, we couldn\'t find such data. Please try again';
         const title = 'Request Failed';
+        const message = 'Sorry, we couldn\'t find such data. Please try again';
+        this.showErrorToast(message, title);
+
+      } else if (error.status === 422) {
+        const message =  error.error.message;
+        const title = 'Invalid Request';
         this.showErrorToast(message, title);
 
       } else if (error.status === 500) {
