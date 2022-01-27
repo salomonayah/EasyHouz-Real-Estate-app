@@ -69,7 +69,7 @@ export class UserPostsComponent implements OnInit , OnDestroy {
   }
 
   modifyUserAnnouncement(announcementId: string): void {
-
+    this.router.navigate(['/main/add-new-posts', announcementId]);
   }
 
   ngOnDestroy(): void {
