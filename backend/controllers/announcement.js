@@ -7,18 +7,49 @@ const Announcement = require('../models/announcement');
 const User = require('../models/user');
 
 exports.getAllAnnouncements = async (req, res, next) => {
-  const currentPage = req.query.page || 1;
-  const perPage = 3;
+  const currentPage = +req.query.page || 1;
+  const perPage = +req.query.perPage;
+
+  // console.log('currentPage', currentPage)
+  // console.log('perPage', perPage)
+  
   try {
     const totalItems = await Announcement.find().countDocuments();
-    const announcements = await Announcement.find()
+    // console.log('totalItems', totalItems)
+
+    const dbannouncements = await Announcement.find()
       .skip((currentPage - 1) * perPage)
       .limit(perPage);
 
+    const announcements = dbannouncements.map(
+      (announcement) => { 
+        return { 
+          houseId: announcement._id, 
+          title: announcement.title,
+          price: announcement.price,
+          location: announcement.location,
+          advantage: announcement.advantage,
+          description: announcement.description,
+          imageUrl: announcement.imageUrl,
+          userId: announcement.userId,
+          createdAt: announcement.createdAt,
+          updatedAt: announcement.updatedAt
+        }
+      }
+    );
+
+    const totalPages = totalItems/perPage;
+
     res.status(200).json({
-      message: 'Fetched announcements successfully.',
-      announcements: announcements,
-      totalItems: totalItems
+      data: {
+        announcements:announcements,
+        totalItems: totalItems,
+        totalPages: totalPages,
+        currentPage: currentPage
+      },
+      code: 200,
+      message: 'Announcements fetched successfully.',
+      error: null
     });
   } catch (err) {
     if (!err.statusCode) {
@@ -62,7 +93,7 @@ exports.addNewAnnouncement = async (req, res, next) => {
   const location = req.body.location;
   const advantage = req.body.advantage;
   const description = req.body.description;
-  const imageUrl = req.file.path + req.fileExtension;
+  const imageUrl = req.file.path;
 
   const announcement = new Announcement({
     title: title,

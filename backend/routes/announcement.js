@@ -6,8 +6,8 @@ const isAuth = require('../middleware/is-auth');
 
 const router = express.Router();
 
-// GET /api/announcement/getAll?page=< pageNumber >
-router.get('/getAll', isAuth, announcementController.getAllAnnouncements);
+// GET /api/announcement/getAll?page=< pageNumber >&perPage=< itemsPerPage >
+router.get('/getAll', announcementController.getAllAnnouncements);
 
 // POST /api/announcement/addNew
 router.post('/addNew', isAuth, announcementValidator, announcementController.addNewAnnouncement);

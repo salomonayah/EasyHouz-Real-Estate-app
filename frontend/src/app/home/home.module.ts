@@ -7,13 +7,15 @@ import { AllHousesComponent } from './all-houses/all-houses.component';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home/home.component';
 import { SingleHouseComponent } from './single-house/single-house.component';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 
 @NgModule({
   declarations: [
     HomeComponent,
     AllHousesComponent,
-    SingleHouseComponent
+    SingleHouseComponent,
+    WelcomeComponent
   ],
   imports: [
     AuthModule,

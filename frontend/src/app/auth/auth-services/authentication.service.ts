@@ -25,7 +25,6 @@ export class AuthenticationService {
       private store: Store,
       private toast: ToastrService
   ) {
-
     this.store.select(state => state.AuthState).subscribe(
       (data: AuthStateModel) => {
         this.userSubject =  new BehaviorSubject<User | null>(data?.userData);
@@ -72,6 +71,6 @@ export class AuthenticationService {
       // Using subject here: in case any component want to get user data directly form this service
       this.userSubject.next(null);
 
-      this.router.navigate(['/home']);
+      this.router.navigate(['/home/welcome']);
   }
 }

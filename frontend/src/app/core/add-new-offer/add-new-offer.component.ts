@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 
 import { UserDashboardService } from '../service/user-dashboard.service';
@@ -23,7 +24,10 @@ export class AddNewOfferComponent implements OnInit {
   uploadingError: any;
 
 
-  constructor( private userDashboardService: UserDashboardService) { }
+  constructor(
+    private userDashboardService: UserDashboardService,
+    private router: Router,
+  ) { }
 
   ngOnInit(): void {
 
@@ -46,6 +50,7 @@ export class AddNewOfferComponent implements OnInit {
     this.userDashboardService.createHouse(fd).subscribe(
       (resp) => {
         console.log('New House', resp);
+        this.router.navigate(['/main/user-posts']);
       }
     );
   }
