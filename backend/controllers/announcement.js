@@ -243,7 +243,7 @@ exports.removeAnnouncement = async (req, res, next) => {
       error.statusCode = 404;
       throw error;
     }
-    if (announcement.creator.toString() !== req.userId) {
+    if (announcement.userId.toString() !== req.userId) {
       const error = new Error('Not authorized!');
       error.statusCode = 403;
       throw error;
@@ -256,7 +256,7 @@ exports.removeAnnouncement = async (req, res, next) => {
     user.announcements.pull(announcementId);
     await user.save();
 
-    res.status(200).json({ message: 'Deleted announcement.' });
+    res.status(200).json({ message: 'Announcement Deleted successfully.' });
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;

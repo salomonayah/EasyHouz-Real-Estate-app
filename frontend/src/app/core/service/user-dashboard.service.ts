@@ -20,8 +20,8 @@ export class UserDashboardService {
     return this.http.post<House>('api/announcement/addNew', newHouse);
   }
 
-  deleteUserHouse(userId: string, houseId: string): Observable<any> {
-    return this.http.delete(`api/${userId}/houses/${houseId}`);
+  deleteUserHouse(houseId: string): Observable<any> {
+    return this.http.delete(`api/announcement/remove/${houseId}`);
   }
 
   updateUserCourse(userId: string, houseId: string | number, newHouse: House): Observable<any> {

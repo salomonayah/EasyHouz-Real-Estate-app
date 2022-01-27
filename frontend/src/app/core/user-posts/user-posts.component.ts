@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Select } from '@ngxs/store';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 
@@ -27,6 +28,7 @@ export class UserPostsComponent implements OnInit , OnDestroy {
   constructor(
     private router: Router,
     private userDashboardService: UserDashboardService,
+    private toast: ToastrService
   ) {
   }
 
@@ -58,14 +60,12 @@ export class UserPostsComponent implements OnInit , OnDestroy {
   }
 
   deleteUserAnnouncement(announcementId: string): void {
-    const userId = this.user?.userId || '';
-
-    this.userDashboardService.deleteUserHouse(userId , announcementId).subscribe(
+    this.userDashboardService.deleteUserHouse(announcementId).subscribe(
       (resp) => {
-        this.userHouseList = resp.data.announcements;
+        this.toast.success(resp.message);
+        this.fetchAnnouncementByUserId();
       }
     );
-
   }
 
   modifyUserAnnouncement(announcementId: string): void {
