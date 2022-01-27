@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { House } from '../../shared/model/house.model';
+import { House, HouseList } from '../../shared/model/house.model';
+import { TypedServerResponse } from '../../shared/model/shared.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,8 @@ export class UserDashboardService {
 
   constructor(private http: HttpClient) { }
 
-  getHouseByUser(userId: string): Observable<House[]> {
-    return this.http.get<House[]>(`api/${userId}/houses`);
+  getHouseByUserId(userId: string , pageNumber: number , itemsPerPage: number ): Observable<TypedServerResponse<HouseList>> {
+    return this.http.get<TypedServerResponse<HouseList>>(`/api/announcement/getAll?page=${pageNumber}&perPage=${itemsPerPage}&userId=${userId}`);
   }
 
   createHouse(newHouse: FormData): Observable<House> {

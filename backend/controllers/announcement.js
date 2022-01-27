@@ -9,12 +9,20 @@ const User = require('../models/user');
 exports.getAllAnnouncements = async (req, res, next) => {
   const currentPage = +req.query.page || 1;
   const perPage = +req.query.perPage;
+  const userId = +req.query.userId;
   try {
-    const totalItems = await Announcement.find().countDocuments();
+    let totalItems = 0;
+    let dbannouncements = [];
 
-    const dbannouncements = await Announcement.find()
-      .skip((currentPage - 1) * perPage)
-      .limit(perPage);
+    if( userId && userId != '' ) {
+      totalItems = await Announcement.find({userId: userId}).countDocuments();
+      dbannouncements = await Announcement.find({userId: userId}).skip((currentPage - 1) * perPage).limit(perPage);
+
+    } else {
+      totalItems = await Announcement.find().countDocuments();
+      dbannouncements = await Announcement.find().skip((currentPage - 1) * perPage).limit(perPage);
+    }
+
 
     const announcements = dbannouncements.map(
       (announcement) => { 

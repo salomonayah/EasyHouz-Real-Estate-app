@@ -1,7 +1,29 @@
+<div>
+  <div *ngIf="userHouseList.length">
+    <div class="section-title" >Here is all your active announcement</div>
+    <div class="section-subTitle">You can feel free to manage them...</div>
+  </div>
+<div>
+
 <div class="container">
-  <app-house-details-card></app-house-details-card>
+
+  <div class="no-annoouncement" *ngIf="!userHouseList.length else userHouseListTemp ">
+    <div>
+      You have no active announcement published for now...
+    </div>
+
+    <div class="action-button">
+      <button class="button sell-button"  (click)="navigate('/main/add-new-posts')" >Sell your house</button>
+    </div>
+  </div>
+
 </div>
 
+
+
+<ng-template #userHouseListTemp>
+  <app-house-details-card *ngFor="let item of userHouseList; let i = index" [houseDetais]="item" ></app-house-details-card>
+</ng-template>
 
 
 <button (click)="openAddForm()" class="button add-offer-button"> + </button>

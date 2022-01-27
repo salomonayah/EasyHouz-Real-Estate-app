@@ -3,6 +3,7 @@ import { Select } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { takeWhile } from 'rxjs/operators';
 
+import { environment } from '../../../environments/environment';
 import { User } from '../../auth/model/auth.model';
 import { AuthState, AuthStateModel } from '../../auth/store/auth.state';
 import { House } from '../model/house.model';
@@ -13,6 +14,8 @@ import { House } from '../model/house.model';
   styleUrls: ['./house-details-card.component.scss']
 })
 export class HouseDetailsCardComponent implements OnInit, OnDestroy {
+
+  serverApiUrl = environment.apiBaseUrl + '/';
 
   @Input() houseDetais: House;
 
