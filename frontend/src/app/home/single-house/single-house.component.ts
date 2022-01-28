@@ -30,7 +30,6 @@ export class SingleHouseComponent implements OnInit {
     this.homeService.getHouseById(houseId).subscribe(
       (resp) => {
         this.houseDetails = resp.data;
-        console.log('this.houseDetails', this.houseDetails);
       }
     );
   }
