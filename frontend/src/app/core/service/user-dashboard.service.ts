@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { House } from '../../shared/model/house.model';
+import { House, HouseList } from '../../shared/model/house.model';
+import { TypedServerResponse } from '../../shared/model/shared.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,20 +12,20 @@ export class UserDashboardService {
 
   constructor(private http: HttpClient) { }
 
-  getHouseByUser(userId: string): Observable<House[]> {
-    return this.http.get<House[]>(`api/${userId}/houses`);
+  getHouseByUserId(userId: string , pageNumber: number , itemsPerPage: number ): Observable<TypedServerResponse<HouseList>> {
+    return this.http.get<TypedServerResponse<HouseList>>(`/api/announcement/getAll?page=${pageNumber}&perPage=${itemsPerPage}&userId=${userId}`);
   }
 
   createHouse(newHouse: FormData): Observable<House> {
     return this.http.post<House>('api/announcement/addNew', newHouse);
   }
 
-  deleteUserHouse(userId: string, houseId: string): Observable<any> {
-    return this.http.delete(`api/${userId}/houses/${houseId}`);
+  deleteUserHouse(houseId: string): Observable<any> {
+    return this.http.delete(`api/announcement/remove/${houseId}`);
   }
 
-  updateUserCourse(userId: string, houseId: string | number, newHouse: House): Observable<any> {
-    return this.http.put(`api/${userId}/houses/${houseId}`, newHouse);
+  updateUserCourse(houseId: string , newHouseData: FormData): Observable<any> {
+    return this.http.put(`api/announcement/edit/${houseId}`, newHouseData);
   }
 
 }

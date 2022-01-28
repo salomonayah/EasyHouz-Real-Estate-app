@@ -24,6 +24,10 @@ const routes: Routes = [
         component: AddNewOfferComponent
       },
       {
+        path: 'update-posts/:houseId',
+        component: AddNewOfferComponent
+      },
+      {
         path: '',
         redirectTo: 'onboarding',
         pathMatch: 'full',

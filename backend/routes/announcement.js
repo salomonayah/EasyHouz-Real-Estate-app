@@ -6,7 +6,7 @@ const isAuth = require('../middleware/is-auth');
 
 const router = express.Router();
 
-// GET /api/announcement/getAll?page=< pageNumber >&perPage=< itemsPerPage >
+// GET /api/announcement/getAll?userId=< userId >&page=< pageNumber >&perPage=< itemsPerPage >
 router.get('/getAll', announcementController.getAllAnnouncements);
 
 // POST /api/announcement/addNew
@@ -18,7 +18,7 @@ router.get('/single/:announcementId', announcementController.singleAnnouncement)
 // PUT /api/announcement/edit/< announcementId >
 router.put('/edit/:announcementId', isAuth, announcementValidator, announcementController.editAnnouncement);
 
-// GET /api/announcement/edit/< announcementId >
+// GET /api/announcement/remove/< announcementId >
 router.delete('/remove/:announcementId', isAuth, announcementController.removeAnnouncement);
 
 

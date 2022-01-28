@@ -9,12 +9,20 @@ const User = require('../models/user');
 exports.getAllAnnouncements = async (req, res, next) => {
   const currentPage = +req.query.page || 1;
   const perPage = +req.query.perPage;
+  const userId = +req.query.userId;
   try {
-    const totalItems = await Announcement.find().countDocuments();
+    let totalItems = 0;
+    let dbannouncements = [];
 
-    const dbannouncements = await Announcement.find()
-      .skip((currentPage - 1) * perPage)
-      .limit(perPage);
+    if( userId && userId != '' ) {
+      totalItems = await Announcement.find({userId: userId}).countDocuments();
+      dbannouncements = await Announcement.find({userId: userId}).skip((currentPage - 1) * perPage).limit(perPage);
+
+    } else {
+      totalItems = await Announcement.find().countDocuments();
+      dbannouncements = await Announcement.find().skip((currentPage - 1) * perPage).limit(perPage);
+    }
+
 
     const announcements = dbannouncements.map(
       (announcement) => { 
@@ -204,7 +212,7 @@ exports.editAnnouncement = async (req, res, next) => {
       error.statusCode = 404;
       throw error;
     }
-    if (announcement.creator.toString() !== req.userId) {
+    if (announcement.userId.toString() !== req.userId) {
       const error = new Error('Not authorized!');
       error.statusCode = 403;
       throw error;
@@ -235,7 +243,7 @@ exports.removeAnnouncement = async (req, res, next) => {
       error.statusCode = 404;
       throw error;
     }
-    if (announcement.creator.toString() !== req.userId) {
+    if (announcement.userId.toString() !== req.userId) {
       const error = new Error('Not authorized!');
       error.statusCode = 403;
       throw error;
@@ -248,7 +256,7 @@ exports.removeAnnouncement = async (req, res, next) => {
     user.announcements.pull(announcementId);
     await user.save();
 
-    res.status(200).json({ message: 'Deleted announcement.' });
+    res.status(200).json({ message: 'Announcement Deleted successfully.' });
   } catch (err) {
     if (!err.statusCode) {
       err.statusCode = 500;
