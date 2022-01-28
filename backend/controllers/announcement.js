@@ -212,7 +212,7 @@ exports.editAnnouncement = async (req, res, next) => {
       error.statusCode = 404;
       throw error;
     }
-    if (announcement.creator.toString() !== req.userId) {
+    if (announcement.userId.toString() !== req.userId) {
       const error = new Error('Not authorized!');
       error.statusCode = 403;
       throw error;

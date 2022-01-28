@@ -1,9 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 
+import { HomeService } from '../../home/service/home.service';
 import { UserDashboardService } from '../service/user-dashboard.service';
+import { environment } from './../../../environments/environment';
 
 @Component({
   selector: 'app-add-new-offer',
@@ -14,7 +16,7 @@ export class AddNewOfferComponent implements OnInit {
 
   @ViewChild('newPostForm', {static: true}) newPostForm!: NgForm;
 
-
+  serverApiUrl = environment.apiBaseUrl + '/';
   imgToCropSelected = false;
   imageChangedEvent: any = '';
   croppingValidated = false;
@@ -22,22 +24,55 @@ export class AddNewOfferComponent implements OnInit {
   imgToCrop = false;
   housePicture: File;
   uploadingError: any;
-
+  houseId = '';
+  houseDetails: any = {
+    houseId: '',
+    imageUrl: '',
+    title: '',
+    price: this.houseId ? 0 : null,
+    location: '',
+    advantage: '',
+    description: '',
+    userId: '',
+    createdAt: '',
+    updatedAt: ''
+  };
 
   constructor(
     private userDashboardService: UserDashboardService,
     private router: Router,
+    private route: ActivatedRoute,
+    private homeService: HomeService
   ) { }
 
   ngOnInit(): void {
-
+    this.houseId = this.route.snapshot.params.houseId;
+    console.log('this.houseId');
+    console.log(this.houseId);
+    if (this.houseId) {
+      this.fetchHouseDetails(this.houseId);
+    }
   }
+
+  fetchHouseDetails(houseId: string): void {
+    this.homeService.getHouseById(houseId).subscribe(
+      (resp) => {
+        this.houseDetails = resp.data;
+        this.croppedImage = this.serverApiUrl + resp.data.imageUrl;
+        this.imgToCropSelected = true;
+        this.croppingValidated = true;
+        console.log('this.houseDetails', this.houseDetails);
+        console.log('this.croppedImage', this.croppedImage);
+      }
+    );
+  }
+
 
   onSubmit(formData: NgForm): void {
     const formValues = formData.form.value;
     const fd = new FormData();
 
-    fd.append('image', this.housePicture);
+    fd.append('image', this.imgToCrop ? this.housePicture : this.houseDetails.imageUrl);
     fd.append('title', formValues.title);
     fd.append('price', formValues.price);
     fd.append('location', formValues.location);
@@ -47,12 +82,22 @@ export class AddNewOfferComponent implements OnInit {
     console.log('Add New House img: ', fd.get('image'));
     console.log('Add New House: ', fd);
 
-    this.userDashboardService.createHouse(fd).subscribe(
-      (resp) => {
-        console.log('New House', resp);
-        this.router.navigate(['/main/user-posts']);
-      }
-    );
+    if (this.houseId) { // EDIT
+      this.userDashboardService.updateUserCourse(this.houseId, fd).subscribe(
+        (resp) => {
+          console.log('New Edited House', resp);
+          this.router.navigate(['/main/user-posts']);
+        }
+      );
+
+    } else { // ADD
+      this.userDashboardService.createHouse(fd).subscribe(
+        (resp) => {
+          console.log('New House', resp);
+          this.router.navigate(['/main/user-posts']);
+        }
+      );
+    }
   }
 
   validCropping(): void {

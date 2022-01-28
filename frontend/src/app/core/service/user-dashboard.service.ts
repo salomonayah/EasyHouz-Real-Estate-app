@@ -24,8 +24,8 @@ export class UserDashboardService {
     return this.http.delete(`api/announcement/remove/${houseId}`);
   }
 
-  updateUserCourse(userId: string, houseId: string | number, newHouse: House): Observable<any> {
-    return this.http.put(`api/${userId}/houses/${houseId}`, newHouse);
+  updateUserCourse(houseId: string , newHouseData: FormData): Observable<any> {
+    return this.http.put(`api/announcement/edit/${houseId}`, newHouseData);
   }
 
 }

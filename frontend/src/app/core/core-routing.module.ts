@@ -20,7 +20,11 @@ const routes: Routes = [
         component: UserPostsComponent
       },
       {
-        path: 'add-new-posts/:postId',
+        path: 'add-new-posts',
+        component: AddNewOfferComponent
+      },
+      {
+        path: 'update-posts/:houseId',
         component: AddNewOfferComponent
       },
       {

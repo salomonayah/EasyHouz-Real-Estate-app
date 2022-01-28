@@ -1,7 +1,13 @@
 <div class="container">
+  <div *ngIf="!houseId">
+    <div class="section-title">Add the details of the new house you want to sell</div>
+    <div class="section-subTitle">try to give us enough precision about it.</div>
+  </div>
 
-  <div class="section-title">Add the details of the new house you want to sell</div>
-  <div class="section-subTitle">try to give us enough precision about it.</div>
+  <div *ngIf="houseId">
+    <div class="section-title">Modify the house details</div>
+    <div class="section-subTitle">try to give us enough precision about it.</div>
+  </div>
 
   <form #newPostForm="ngForm" (ngSubmit)="onSubmit(newPostForm)">
 
@@ -58,8 +64,7 @@
       <div class="new-post-form-wrapper">
 
         <div>
-          <input placeholder="Short description. Example Four bedroom duplex" type="text" name="title" ngModel
-            #offerTitle="ngModel" required>
+          <input placeholder="Short description. Example Four bedroom duplex" type="text" name="title" ngModel #offerTitle="ngModel" required  [(ngModel)]="houseDetails.title">
           <div *ngIf=" (offerTitle.invalid && (offerTitle.dirty || offerTitle.touched) || (offerTitle.dirty  && !isSet(offerTitle.value))  ) " class="text-danger">
             <small *ngIf="offerTitle.errors?.required"> * Oups ! This field is required. </small>
 
@@ -75,7 +80,7 @@
         </div>
 
         <div>
-          <input placeholder="Price. Example 150.000 USD" type="number" name="price" ngModel #price="ngModel" required>
+          <input placeholder="Price. Example 150.000 USD" type="number" name="price" ngModel #price="ngModel" required [(ngModel)]="houseDetails.price">
           <div *ngIf=" price.invalid && (price.dirty || price.touched)|| (price.dirty  && !isSet(price.value)) " class="text-danger">
             <small *ngIf="price.errors?.required"> * Oups ! This field is required. </small>
           </div>
@@ -86,8 +91,7 @@
 
 
         <div>
-          <input placeholder="Location. Example Paris,...." type="text" name="location" ngModel #location="ngModel"
-            required>
+          <input placeholder="Location. Example Paris,...." type="text" name="location" ngModel #location="ngModel" required  [(ngModel)]="houseDetails.location">
           <div *ngIf=" location.invalid && (location.dirty || location.touched) || (location.dirty  && !isSet(location.value)) " class="text-danger">
             <small *ngIf="location.errors?.required"> * Oups ! This field is required. </small>
           </div>
@@ -103,7 +107,7 @@
 
 
         <div>
-          <input placeholder="Others advantages. Example close to hospital and school" type="text" name="advantage" ngModel #advantage="ngModel">
+          <input placeholder="Others advantages. Example close to hospital and school" type="text" name="advantage" ngModel #advantage="ngModel"  [(ngModel)]="houseDetails.advantage" required>
           <div *ngIf="advantage.invalid && (advantage.dirty || advantage.touched) || (advantage.dirty  && !isSet(advantage.value))" class="text-danger">
             <small *ngIf="advantage.errors?.required"> * Oups ! This field is required. </small>
           </div>
@@ -118,8 +122,7 @@
         </div>
 
         <div>
-          <textarea placeholder="More description. Example Anything the client should know.." id="description"
-            name="description" rows="3" ngModel #description="ngModel" required> </textarea>
+          <textarea placeholder="More description. Example Anything the client should know.." id="description"  [(ngModel)]="houseDetails.description" name="description" rows="3" ngModel #description="ngModel" required> </textarea>
           <div *ngIf="description.invalid && (description.dirty || description.touched) || (description.dirty  && !isSet(description.value))" class="text-danger">
             <small *ngIf="description.errors?.required"> * Oups ! This field is required. </small>
           </div>
