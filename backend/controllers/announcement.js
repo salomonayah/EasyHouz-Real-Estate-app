@@ -194,9 +194,13 @@ exports.editAnnouncement = async (req, res, next) => {
     error.statusCode = 422;
     throw error;
   }
-  const title = req.body.title;
-  const content = req.body.content;
   let imageUrl = req.body.image;
+  const title = req.body.title;
+  const price = req.body.price;
+  const location = req.body.location;
+  const advantage = req.body.advantage;
+  const description = req.body.description;
+
   if (req.file) {
     imageUrl = req.file.path;
   }
@@ -220,9 +224,14 @@ exports.editAnnouncement = async (req, res, next) => {
     if (imageUrl !== announcement.imageUrl) {
       clearImage(announcement.imageUrl);
     }
-    announcement.title = title;
+
     announcement.imageUrl = imageUrl;
-    announcement.content = content;
+    announcement.title = title;
+    announcement.price = price;
+    announcement.location = location;
+    announcement.advantage = advantage;
+    announcement.description = description;
+
     const result = await announcement.save();
     res.status(200).json({ message: 'Announcement updated!', announcement: result });
   } catch (err) {
