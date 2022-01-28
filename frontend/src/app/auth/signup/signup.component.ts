@@ -47,7 +47,6 @@ export class SignupComponent implements OnInit {
     this.authenticationService.signUp(userData).subscribe(
       (resp) => {
         this.userCreated.emit(true);
-        console.log('signUp', resp);
     });
 
   }
@@ -117,7 +116,6 @@ export class SignupComponent implements OnInit {
   }
 
   hasError(event: any): void {
-    console.log(event);
     if (event === false) {
       this.caption = 'Please Enter a valid phone number.';
       this.error = true;

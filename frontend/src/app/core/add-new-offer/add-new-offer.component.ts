@@ -47,8 +47,6 @@ export class AddNewOfferComponent implements OnInit {
 
   ngOnInit(): void {
     this.houseId = this.route.snapshot.params.houseId;
-    console.log('this.houseId');
-    console.log(this.houseId);
     if (this.houseId) {
       this.fetchHouseDetails(this.houseId);
     }
@@ -61,8 +59,6 @@ export class AddNewOfferComponent implements OnInit {
         this.croppedImage = this.serverApiUrl + resp.data.imageUrl;
         this.imgToCropSelected = true;
         this.croppingValidated = true;
-        console.log('this.houseDetails', this.houseDetails);
-        console.log('this.croppedImage', this.croppedImage);
       }
     );
   }
@@ -79,13 +75,9 @@ export class AddNewOfferComponent implements OnInit {
     fd.append('advantage', formValues.advantage);
     fd.append('description', formValues.description);
 
-    console.log('Add New House img: ', fd.get('image'));
-    console.log('Add New House: ', fd);
-
     if (this.houseId) { // EDIT
       this.userDashboardService.updateUserCourse(this.houseId, fd).subscribe(
         (resp) => {
-          console.log('New Edited House', resp);
           this.router.navigate(['/main/user-posts']);
         }
       );
@@ -93,7 +85,6 @@ export class AddNewOfferComponent implements OnInit {
     } else { // ADD
       this.userDashboardService.createHouse(fd).subscribe(
         (resp) => {
-          console.log('New House', resp);
           this.router.navigate(['/main/user-posts']);
         }
       );
