@@ -15,7 +15,7 @@ import { UserDashboardService } from '../service/user-dashboard.service';
   templateUrl: './user-posts.component.html',
   styleUrls: ['./user-posts.component.scss']
 })
-export class UserPostsComponent implements OnInit , OnDestroy {
+export class UserPostsComponent implements OnInit, OnDestroy {
 
   @Select(AuthState) authState$: Observable<AuthStateModel>;
 
@@ -35,10 +35,10 @@ export class UserPostsComponent implements OnInit , OnDestroy {
   ngOnInit(): void {
     this.componentActive = true;
     this.authState$.pipe(takeWhile(() => this.componentActive))
-    .subscribe((state) => {
-      this.user = state.userData;
-      this.fetchAnnouncementByUserId();
-    });
+      .subscribe((state) => {
+        this.user = state.userData;
+        this.fetchAnnouncementByUserId();
+      });
   }
 
   openAddForm(): void {
@@ -47,8 +47,10 @@ export class UserPostsComponent implements OnInit , OnDestroy {
 
   fetchAnnouncementByUserId(): void {
     const userId = this.user?.userId || '';
+    console.log('userId');
+    console.log(userId);
 
-    this.userDashboardService.getHouseByUserId(userId , 1, 3).subscribe(
+    this.userDashboardService.getHouseByUserId(userId, 1, 3).subscribe(
       (resp) => {
         this.userHouseList = resp.data.announcements;
       }

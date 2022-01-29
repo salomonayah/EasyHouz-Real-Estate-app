@@ -9,7 +9,7 @@ const User = require('../models/user');
 exports.getAllAnnouncements = async (req, res, next) => {
   const currentPage = +req.query.page || 1;
   const perPage = +req.query.perPage;
-  const userId = +req.query.userId;
+  const userId = req.query.userId;
   try {
     let totalItems = 0;
     let dbannouncements = [];
