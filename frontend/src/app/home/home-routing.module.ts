@@ -12,8 +12,8 @@ const routes: Routes = [
     component: HomeComponent,
     children: [
       {
-      path: 'welcome',
-      component: WelcomeComponent
+        path: 'welcome',
+        component: WelcomeComponent
       },
       {
         path: 'all-houses',

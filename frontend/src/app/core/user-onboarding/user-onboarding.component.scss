@@ -4,6 +4,9 @@
   font-size: 18px;
   line-height: 120%;
   color: #1E3240;
+  @media (max-width: 425px) {
+    margin-top: 20px;
+  }
 }
 
 

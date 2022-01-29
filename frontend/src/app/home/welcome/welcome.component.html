@@ -13,7 +13,7 @@
       </div>
 
       <div class="action-button">
-        <button class="button sell-button" (click)="navigate('/main/add-new-posts')" >Sell your house</button>
+        <button class="button sell-button" (click)="navigate('/main/add-new-posts')" >Sell a house</button>
       </div>
 
     </div>
@@ -40,7 +40,7 @@
         </div>
 
         <div class="action-button">
-          <button class="button sell-button"  (click)="navigate('/main/add-new-posts')" >Sell your house</button>
+          <button class="button sell-button"  (click)="navigate('/main/add-new-posts')" >Sell a house</button>
         </div>
       </div>
 
@@ -54,7 +54,7 @@
     </div>
 
     <div class="action-button">
-      <button class="button sell-button"  (click)="navigate('/main/add-new-posts')" >Sell your house</button>
+      <button class="button sell-button"  (click)="navigate('/main/add-new-posts')" >Sell a house</button>
     </div>
 
   </div>
@@ -65,6 +65,6 @@
 
 <ng-template #topHouseListTemp>
   <app-house-preview *ngFor="let item of topHouseList; let i = index" [previewImgUrl]="serverApiUrl+item.imageUrl" [houseId]="item.houseId"
-    houseName="Newly Built 5 Bedrooms Detached House" houseTown="Lekki Lagos">
+    [houseName]="item.title" [houseTown]="item.location">
   </app-house-preview>
 </ng-template>

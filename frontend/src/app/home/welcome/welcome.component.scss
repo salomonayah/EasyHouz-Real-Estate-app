@@ -29,6 +29,39 @@
   position: absolute;
   bottom: calc((100vw * 170) / 1440 );
   right: 46%;
+
+  @media (min-width:1225px) and (max-width:1375px) {
+    right: 41%;
+  }
+  @media (min-width:1200px) and (max-width:1225px) {
+    right: 40%;
+    width: 115px;
+    height: auto;
+  }
+  @media (min-width:1130px) and (max-width:1200px) {
+    bottom: calc((100vw * 300) / 1440 );
+  }
+  @media (min-width:1000px) and (max-width:1130px) {
+    position: absolute;
+    bottom: calc((100vw * 310) / 1440 );
+    right: 41%;
+    width: 100px;
+    height: auto;
+  }
+
+  @media (max-width: 999px) {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    display: inline;
+  }
+
+  @media (max-width: 425px) {
+    display: inline;
+    width: 100px;
+    height: auto;
+  }
 }
 
 .header-text-box {
@@ -37,12 +70,36 @@
   bottom: calc((100vw * 123) / 1440 );
   right: 48%;
 
+  @media (min-width:1881px) and (max-width:2076px) {
+    bottom: calc((100vw * 176) / 1440 );
+    right: 48%;
+  }
+
+  @media (max-width:768px) {
+    bottom: calc((100vw * 530) / 1440 );
+    right: 48%;
+  }
+
+  @media (max-width:425px) {
+    bottom: calc((100vw * 700) / 1440 );
+    right: 48%;
+  }
+
   .headline-text {
     font-family: Mulish-Medium;
     font-weight: bold;
     font-size: 75px;
     line-height: 120%;
     color: #1E3240;
+    @media (max-width:1130px) {
+      font-size: 55px!important;
+    }
+    @media (max-width:780px) {
+      font-size: 25px!important;
+    }
+    @media (max-width:425px) {
+      font-size: 18px!important;
+    }
   }
 
   .subline-text {
@@ -50,6 +107,8 @@
   }
 
 }
+
+
 
 .action-button-box {
   display: flex;
@@ -68,6 +127,11 @@
       cursor: pointer;
 
       transition-duration: 0.4s;/* determine the speed of the "hover" effect: */
+
+      @media (max-width: 768px) {
+        margin-right:10px;
+      }
+
       &:hover {
         // background:transparent;
         // color: #1E3240;
@@ -176,6 +240,10 @@
       }
 
 
+    }
+
+    @media (max-width: 560px) {
+      flex-direction: column;
     }
   }
 }

@@ -30,6 +30,8 @@
   .hamburger-icon {
     position: relative;
     top: 2px;
+
+
   }
 
   .company-brand {
@@ -37,6 +39,17 @@
     font-weight: bold;
     font-size: 50px;
     color: #1E3240;
+
+    @media (max-width: 816px) {
+      font-size: 25px;
+      margin-left: 25px;
+      margin-right: 65px;
+    }
+    @media (max-width: 699px) {
+      font-size: 25px;
+      margin-left: 15px;
+      margin-right: 65px;
+    }
   }
 
 
@@ -47,7 +60,8 @@
 
   .menu-hamburger-icon-wrapper {
     width: fit-content;
-    @media (min-width: 768px) {
+    margin-left: 50px;
+    @media (min-width: 700px) {
       display: none!important;
     }
   }
@@ -58,18 +72,27 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    @media (max-width: 1024px) {
+      width: 450px;
+      margin-right: 69px;
+      // display: none;
+    }
+
+    @media (max-width: 699px) {
+      display: none!important;
+    }
 
     .menu-item a {
       cursor: pointer;
       font-size: 21px;
+      @media (max-width: 1024px) {
+        font-size: 18px;
+      }
+
     }
   }
 
-  @media (max-width: 768px) {
-    .top-menu-item {
-      display: none;
-    }
-  }
+
 
   .topnavbar a {
     color:#1E3240;
@@ -139,4 +162,80 @@
   }
 
 
+
+
+}
+
+
+/* --------------------------Fixed sidenav, full height -----------------------------*/
+.sidenav-mobile {
+  height: 100vh;
+  width: 160px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #1E3240;
+  z-index: 51;
+
+
+  .company-brand-mobile {
+    font-family: Mulish-Medium;
+    font-weight: bold;
+    font-size: 50px;
+    color: #FFF;
+    margin: 25px 0;
+
+    @media (max-width: 816px) {
+      font-size: 25px;
+      margin-left: 25px;
+      margin-right: 65px;
+    }
+    @media (max-width: 699px) {
+      font-size: 25px;
+      margin-left: 15px;
+      margin-right: 65px;
+    }
+  }
+
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav-mobile {
+    padding-top: 15px;
+  }
+  .sidenav-mobile a {
+    font-size: 18px;
+  }
+}
+
+.sidebar-menu-item {
+  padding: 15px 0 15px 15px;
+
+  /* Style the sidenav links and the dropdown button */
+  a {
+    text-decoration: none;
+    display: block;
+    border: none;
+    background: none;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+    outline: none;
+    color: #FFF;
+    font-size: 20px;
+  }
+
+  /* On mouse-over */
+  a:hover {
+    color: #AFD4E2;
+  }
+}
+
+.sidenav-mobile {
+   -ms-overflow-style: none;  /* IE and Edge */
+   scrollbar-width: none;  /* Firefox */
+}
+
+.sidenav::-webkit-scrollbar {
+   display: none;
 }
