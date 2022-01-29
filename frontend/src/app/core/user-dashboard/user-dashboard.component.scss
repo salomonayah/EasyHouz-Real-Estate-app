@@ -6,6 +6,12 @@
   overflow:scroll;
   padding: 15px;
   position: relative;
+
+  @media (max-width: 425px) {
+    width: 100vw !important;
+    margin-left: 0px;
+
+  }
 }
 .main-content {
    -ms-overflow-style: none;  /* IE and Edge */

@@ -8,6 +8,10 @@
   left: 0;
   background-color: #1E3240;
   overflow-x: hidden;
+
+  @media (max-width: 425px) {
+    display: none;
+  }
 }
 
 .sidenav-hidden {

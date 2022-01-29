@@ -1,7 +1,7 @@
-<div class="auth-modal-wrapper" *ngIf="authActive">
-  <div class="modal-container" (click)="authActive = false;">
+<div class="auth-modal-wrapper" *ngIf="authActive || mobileMenuActive">
+  <div class="modal-container" (click)="authActive = false; mobileMenuActive = false;">
   </div>
-  <div class="modal-body-card">
+  <div class="modal-body-card" *ngIf="componentToDisplay != 'Menu'">
     <div *ngIf="componentToDisplay === 'SignIn'">
       <app-login  (userLoggedIn)="authActive = false" ></app-login>
       <div class="container">
@@ -18,6 +18,37 @@
     </div>
   </div>
 
+  <div *ngIf="componentToDisplay === 'Menu'">
+    <div class="sidenav-mobile">
+
+      <div class="company-brand-mobile">
+        EasyHouz
+      </div>
+
+      <div class="sidebar-menu-items-wrapper">
+        <div class="sidebar-menu-item">
+          <a (click)="authActive = false; mobileMenuActive = false;" routerLinkActive="active" routerLink="/home/welcome">Home</a>
+        </div>
+        <div class="sidebar-menu-item">
+          <a (click)="authActive = false; mobileMenuActive = false;" routerLinkActive="active" routerLink="/home/all-houses" >All houses</a>
+        </div>
+        <div class="sidebar-menu-item" *ngIf="isLoggedIn">
+          <a (click)="authActive = false; mobileMenuActive = false;" routerLinkActive="active" routerLink="/main/onboarding" >Onboarding</a>
+        </div>
+        <div class="sidebar-menu-item" *ngIf="isLoggedIn">
+          <a  (click)="authActive = false; mobileMenuActive = false;"  routerLinkActive="active" routerLink="/main/user-posts" class="">All your posts</a>
+        </div>
+        <div class="sidebar-menu-item" *ngIf="!isLoggedIn">
+          <a  (click)="openSignIn()"  >Sign In</a>
+        </div>
+        <div class="sidebar-menu-item"  *ngIf="isLoggedIn">
+          <a  (click)="signOut()">Sign out</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
 </div>
 
 <div class="topnavbar ">
@@ -25,7 +56,7 @@
   <div class="mobile-menu-toggler-and-brand">
 
     <div class="menu-hamburger-icon-wrapper">
-      <span>
+      <span (click)="openMenu()">
         <img
           class="hamburger-icon"
           src="assets/img/square.png"

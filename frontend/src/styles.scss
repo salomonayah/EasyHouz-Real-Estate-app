@@ -27,6 +27,9 @@ button {
   width: 76%;
   font-size: 20px;
   margin: 30px auto;
+  @media (max-width: 1280px) {
+    width: 90%;
+  }
 }
 
 .section-title {

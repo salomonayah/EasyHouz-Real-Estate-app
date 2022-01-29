@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 
@@ -13,8 +13,13 @@ import { HomeService } from '../service/home.service';
 })
 export class WelcomeComponent implements OnInit {
   topHouseList: House[] = [];
-
   serverApiUrl = environment.apiBaseUrl + '/';
+  innerWidth: number;
+
+  @HostListener('window:resize', ['$event'])
+  private onResize(event?: any): void {
+    this.innerWidth = window.innerWidth;
+  }
 
   constructor(
     private homeService: HomeService,
@@ -23,6 +28,7 @@ export class WelcomeComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.onResize();
     this.fetchTopHomeAnnouncement();
   }
 
@@ -33,7 +39,8 @@ export class WelcomeComponent implements OnInit {
   }
 
   fetchTopHomeAnnouncement(): void {
-    this.homeService.getAllHouse(1, 3).subscribe(
+    const itemNumber = this.innerWidth < 780 ? 2 : 3;
+    this.homeService.getAllHouse(1, itemNumber).subscribe(
       (resp) => {
         this.topHouseList = resp.data.announcements;
       }

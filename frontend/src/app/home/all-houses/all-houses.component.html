@@ -5,51 +5,22 @@
   <div class="all-deals-list-container">
     <div class="all-deals-list">
 
-      <app-house-preview
-        previewImgUrl='https://media.jumiadeals.com/ng_live/39116aafaf5ea444bd9aaaa.mobile-gallery-large.jpg'
-        houseName="Newly Built 5 Bedrooms Detached House" houseTown="Lekki Lagos">
-      </app-house-preview>
+      <div class="no-announcement" *ngIf="!houseList.length else houseListTemp ">
+        <div>
+          No announcement available for now...
+        </div>
 
-      <app-house-preview
-        previewImgUrl='https://media.jumiadeals.com/ng_live/39116aafaf5ea444bd9aaaa.mobile-gallery-large.jpg'
-        houseName="Newly Built 5 Bedrooms Detached House" houseTown="Lekki Lagos">
-      </app-house-preview>
-
-      <app-house-preview
-        previewImgUrl='https://media.jumiadeals.com/ng_live/39116aafaf5ea444bd9aaaa.mobile-gallery-large.jpg'
-        houseName="Newly Built 5 Bedrooms Detached House" houseTown="Lekki Lagos">
-      </app-house-preview>
-
-      <app-house-preview
-        previewImgUrl='https://media.jumiadeals.com/ng_live/39116aafaf5ea444bd9aaaa.mobile-gallery-large.jpg'
-        houseName="Newly Built 5 Bedrooms Detached House" houseTown="Lekki Lagos">
-      </app-house-preview>
-
-      <app-house-preview
-        previewImgUrl='https://media.jumiadeals.com/ng_live/39116aafaf5ea444bd9aaaa.mobile-gallery-large.jpg'
-        houseName="Newly Built 5 Bedrooms Detached House" houseTown="Lekki Lagos">
-      </app-house-preview>
-
-      <app-house-preview
-        previewImgUrl='https://media.jumiadeals.com/ng_live/39116aafaf5ea444bd9aaaa.mobile-gallery-large.jpg'
-        houseName="Newly Built 5 Bedrooms Detached House" houseTown="Lekki Lagos">
-      </app-house-preview>
-
-      <app-house-preview
-        previewImgUrl='https://media.jumiadeals.com/ng_live/39116aafaf5ea444bd9aaaa.mobile-gallery-large.jpg'
-        houseName="Newly Built 5 Bedrooms Detached House" houseTown="Lekki Lagos">
-      </app-house-preview>
-
-      <app-house-preview
-        previewImgUrl='https://media.jumiadeals.com/ng_live/39116aafaf5ea444bd9aaaa.mobile-gallery-large.jpg'
-        houseName="Newly Built 5 Bedrooms Detached House" houseTown="Lekki Lagos">
-      </app-house-preview>
-
-      <app-house-preview
-        previewImgUrl='https://media.jumiadeals.com/ng_live/39116aafaf5ea444bd9aaaa.mobile-gallery-large.jpg'
-        houseName="Newly Built 5 Bedrooms Detached House" houseTown="Lekki Lagos">
-      </app-house-preview>
+        <div class="action-button">
+          <button class="button sell-button"  (click)="navigate('/main/add-new-posts')" >Sell a house</button>
+        </div>
+      </div>
 
     </div>
   </div>
 </div>
+
+<ng-template #houseListTemp>
+  <app-house-preview *ngFor="let item of houseList; let i = index" [previewImgUrl]="serverApiUrl+item.imageUrl" [houseId]="item.houseId"
+    [houseName]="item.title" [houseTown]="item.location">
+  </app-house-preview>
+</ng-template>

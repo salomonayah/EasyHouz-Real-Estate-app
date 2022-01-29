@@ -19,9 +19,11 @@ export class TopbarComponent implements OnDestroy, OnInit {
 
   authActive = false;
 
+  mobileMenuActive = false;
+
   componentIsActive = true;
 
-  componentToDisplay: 'SignIn' | 'SignUp';
+  componentToDisplay: 'SignIn' | 'SignUp' | 'Menu';
 
   constructor(
     private authenticationService: AuthenticationService,
@@ -37,6 +39,7 @@ export class TopbarComponent implements OnDestroy, OnInit {
 
   openSignIn(): void {
     this.authActive = true;
+    this.mobileMenuActive = false;
     this.componentToDisplay = 'SignIn';
   }
 
@@ -45,9 +48,15 @@ export class TopbarComponent implements OnDestroy, OnInit {
     this.componentToDisplay = 'SignUp';
   }
 
+  openMenu(): void  {
+    this.mobileMenuActive = true;
+    this.componentToDisplay = 'Menu';
+  }
+
   signOut(): void {
-    this.authenticationService.logout();
     this.authActive = false;
+    this.mobileMenuActive = false;
+    this.authenticationService.logout();
   }
 
   ngOnDestroy(): void {
