@@ -1,2 +1,2 @@
-# braintech-skill-test
-small frontend and backend exercice
+# Angular + Node express full-stack app
+small frontend and backend exercise
